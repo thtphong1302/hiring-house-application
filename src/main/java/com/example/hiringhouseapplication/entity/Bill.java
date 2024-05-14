@@ -18,7 +18,6 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer billID;
-    private int numberElectricBefore;
     private int currentNumberElectrics;
     private int numberWaterBefore;
     private int currentNumberWater;
