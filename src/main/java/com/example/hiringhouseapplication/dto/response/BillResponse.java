@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BillResponse {
-    private int numberElectricsBefore;
+    private String roomName;
+    private int numberElectricBefore;
     private int currentNumberElectrics;
     private int numberWaterBefore;
-    private int currentNumberWaters;
-    private int priceRoom;
+    private int currentNumberWater;
     private int feeService;
-    private long total;
+    private int price;
+    private int total;
 }

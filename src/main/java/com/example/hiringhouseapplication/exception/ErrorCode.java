@@ -9,7 +9,7 @@ public enum ErrorCode {
     UNCATEGORIZED_CODE(999,"Uncategorized code",HttpStatus.INTERNAL_SERVER_ERROR),
     RESOURCES_NOT_EXIST(1001,"RESOURCES NOT EXISTS", HttpStatus.BAD_REQUEST),
     RESOURCES_ALREADY_EXISTS(1002,"RESOURCES ALREADY EXISTS", HttpStatus.BAD_REQUEST),
-
+    INVALID_DAY(1003,"Invalid day", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code,String message,HttpStatus httpStatus){

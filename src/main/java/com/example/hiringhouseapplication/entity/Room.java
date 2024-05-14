@@ -1,5 +1,6 @@
 package com.example.hiringhouseapplication.entity;
 
+import com.example.hiringhouseapplication.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,21 +14,16 @@ import java.util.List;
 @Builder
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roomID;
     private String roomName;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_name")
     private RoomType roomType;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_name")
     private Department department;
 
-    @OneToMany(mappedBy = "room")
-    private List<Resident> residents;
-
-    @OneToMany(mappedBy = "room")
-    private List<Bill> bills;
 }

@@ -3,6 +3,7 @@ package com.example.hiringhouseapplication.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +18,12 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String contractID;
     private String contractName;
-    private Date start;
-    private Date end;
+    private LocalDate startDay;
+    private LocalDate endDay;
     private String description;
     private int numberPersons;
 
-    @ManyToMany
-    private List<Room> rooms;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
 }

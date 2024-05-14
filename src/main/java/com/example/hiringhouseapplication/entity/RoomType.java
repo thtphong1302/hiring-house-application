@@ -4,6 +4,8 @@ import com.example.hiringhouseapplication.enums.Position;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,4 +17,5 @@ public class RoomType {
     private String typeName;
     private int price;
     private int feeService;
+
 }

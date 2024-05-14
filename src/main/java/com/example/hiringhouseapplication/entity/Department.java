@@ -14,13 +14,10 @@ import java.util.List;
 @Entity
 public class Department {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer departmentID;
     private String departmentName;
     private int electricPrice;
     private int waterPrice;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
     private List<Room> rooms;
-
 }

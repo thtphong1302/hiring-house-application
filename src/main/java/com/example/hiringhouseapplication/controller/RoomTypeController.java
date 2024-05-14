@@ -28,15 +28,15 @@ public class RoomTypeController {
         return ApiResponse.<RoomTypeResponse>builder().result(result).build();
     }
 
-    @PutMapping("/{name}")
+    @PutMapping()
     public ApiResponse<RoomTypeResponse> updateRoomType(
-            @PathVariable("name") String name, @RequestBody RoomTypeRequest roomTypeRequest) {
+            @RequestParam String name, @RequestBody RoomTypeRequest roomTypeRequest) {
         var result = roomTypeService.updateRoomType(name, roomTypeRequest);
         return ApiResponse.<RoomTypeResponse>builder().result(result).build();
     }
 
-    @DeleteMapping("/{name}")
-    public ApiResponse<Void> deleteRoomType(@PathVariable("name") String name) {
+    @DeleteMapping()
+    public ApiResponse<Void> deleteRoomType(@RequestParam String name) {
         roomTypeService.deleteRoomType(name);
         return ApiResponse.<Void>builder().message("Delete successfully").build();
     }

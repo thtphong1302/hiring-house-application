@@ -16,9 +16,10 @@ public class Resident {
     private String identityNumber;
     private String residentName;
     private String phoneNumber;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 }
