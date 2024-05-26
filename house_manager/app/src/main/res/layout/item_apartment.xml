@@ -40,15 +40,14 @@
                 android:textSize="23dp" />
 
             <ImageButton
-                android:background="@drawable/bogoc"
-                android:id="@+id/imgedit"
+                android:id="@+id/imgbtnedit"
                 android:layout_width="27dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@android:drawable/ic_menu_edit" />
 
             <ImageButton
-                android:id="@+id/imgdelete"
+                android:id="@+id/imgbtndelete"
                 android:layout_width="26dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

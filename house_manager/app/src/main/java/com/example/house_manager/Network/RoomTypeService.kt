@@ -1,6 +1,7 @@
 package com.example.house_manager.Network
 
 import com.example.house_manager.Model.Room_type
+import retrofit2.Call
 import retrofit2.http.*
 
 
@@ -9,7 +10,7 @@ interface RoomTypeService {
     suspend fun getRoomTypes(): List<Room_type>
 
     @POST("/room_type")
-    suspend fun createRoomType(@Body roomType: Room_type): Room_type
+    fun createRoomType(@Body roomType: Room_type): Call<Room_type>
 
     @PUT("/room_type/{name}")
     suspend fun updateRoomType(@Path("name") name: String, @Body roomType: Room_type): Room_type

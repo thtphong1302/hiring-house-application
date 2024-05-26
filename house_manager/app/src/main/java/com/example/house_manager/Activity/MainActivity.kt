@@ -11,19 +11,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Khởi tạo giao diện và thiết lập sự kiện
-        initViews()
+        // gọi màn hình apartment
+        launchApartmentActivity()
+        // gọi màn hình thống kế
+        launchStatisticsActivity()
     }
-    // Phương thức này dùng để khởi tạo giao diện và thiết lập sự kiện cho các thành phần giao diện
-    private fun initViews() {
-        imgManager = findViewById(R.id.imgManager)
+
+    private fun launchApartmentActivity() {
+        val imgManager = findViewById<ImageView>(R.id.imgManager)
         imgManager.setOnClickListener {
-            launchApartmentActivity()
+            startActivity(Intent(this, ApartmentActivity::class.java))
         }
     }
-    // Phương thức này dùng để khởi động Apartment_Activity
-    private fun launchApartmentActivity() {
-        val intent = Intent(this, ApartmentActivity::class.java)
-        startActivity(intent)
+    private fun launchStatisticsActivity(){
+        val imgStatistics = findViewById<ImageView>(R.id.imgStatistics)
+        imgStatistics.setOnClickListener {
+            startActivity(Intent(this, Statistics_Activity::class.java))}
     }
 }

@@ -14,9 +14,13 @@
         android:theme="@style/Theme.House_manager"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.Statistics_Activity"
+            android:exported="false"
+            android:parentActivityName=".Activity.MainActivity"/>
+        <activity
             android:name=".Activity.AddRoomActivity"
             android:exported="false"
-            android:parentActivityName=".Activity.Room_Activity"/>
+            android:parentActivityName=".Activity.Room_Activity" />
         <activity
             android:name=".Activity.AddApartmentActivity"
             android:exported="false"
