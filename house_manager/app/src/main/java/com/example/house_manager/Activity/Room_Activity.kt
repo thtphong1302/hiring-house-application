@@ -1,13 +1,17 @@
 package com.example.house_manager.Activity
 
 import RoomAdapterFragment
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
+import com.example.house_manager.Helper.ToolbarHelper
 import com.example.house_manager.R
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.activity_room.*
 
 class Room_Activity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
@@ -23,8 +27,8 @@ class Room_Activity : AppCompatActivity() {
         setUpTabs()
         // Thiết lập ViewPager và gán adapter
         setUpViewPager()
-        // Thiết lập action bar và nút back
-        setSupportActionBar()
+        ToolbarHelper.setToolbar(this, "Danh sách các phòng")
+        initimgAddRoom()
     }
 
     // Hàm này dùng để khởi tạo các thành phần giao diện
@@ -52,25 +56,11 @@ class Room_Activity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
-    // Hàm này dùng để thiết lập action bar và nút back
-    private fun setSupportActionBar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
+    private fun initimgAddRoom(){
+        val img = findViewById<ImageView>(R.id.imgAdd_apartment)
+        imgAdd_room.setOnClickListener {
+            startActivity(Intent(this, AddRoomActivity::class.java))
         }
     }
 
-    // Xử lý sự kiện khi nút back được nhấn
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

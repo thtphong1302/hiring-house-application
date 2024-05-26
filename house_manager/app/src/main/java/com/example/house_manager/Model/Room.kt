@@ -6,3 +6,7 @@ data class Room(
     val apartment_name: String?,
     val type_name: String?
 )
+enum class RoomStatus {
+    EMPTY,
+    DONE
+}
