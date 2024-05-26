@@ -1,14 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1573BD">
-
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,7 +16,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:title="" />
 
-        <!-- Nút thêm căn hộ -->
         <ImageView
             android:id="@+id/imgAdd_apartment"
             android:layout_width="47dp"
@@ -27,11 +24,8 @@
             android:layout_marginTop="14dp"
             android:layout_marginEnd="14dp"
             android:src="@drawable/ic_add" />
-
     </FrameLayout>
 
-
-    <!-- Danh sách các căn hộ -->
     <Button
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
@@ -40,9 +34,8 @@
         android:text="Button" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/btn2"
         android:id="@+id/recyclerView"
+        android:layout_below="@id/btn2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content" />
 </RelativeLayout>

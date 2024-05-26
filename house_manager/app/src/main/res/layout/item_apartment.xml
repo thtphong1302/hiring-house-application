@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="265dp">
+        android:layout_height="265dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,14 +28,14 @@
 
             <TextView
                 android:id="@+id/txtcannha"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="Tên căn nhà"
-                android:textColor="@color/white"
-                android:textSize="23dp" />
+                android:textColor="@android:color/white"
+                android:textSize="23sp" />
 
             <ImageButton
                 android:id="@+id/imgbtnedit"
@@ -70,12 +68,13 @@
 
             <TextView
                 android:id="@+id/txtelectric"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="Điện: 3.500đ/kWH"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,12 +93,13 @@
 
             <TextView
                 android:id="@+id/txtwater"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="Nước: 100k/người"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,14 +111,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
             <TextView
                 android:id="@+id/txtstk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="STK: 052249900222"
                 android:textColor="#24327C"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtnameTK"
@@ -126,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="CHỦ TK:NGUYEN VAN A"
                 android:textColor="#24327C"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtnameNH"
@@ -134,12 +133,10 @@
                 android:layout_height="wrap_content"
                 android:text="NH: VIETCOMBANK"
                 android:textColor="#24327C"
-                android:textSize="20dp" />
-
+                android:textSize="20sp" />
         </LinearLayout>
 
         <Button
-
             android:id="@+id/btnListRoom"
             android:layout_width="203dp"
             android:layout_height="38dp"
@@ -147,6 +144,5 @@
             android:layout_marginTop="100dp"
             android:background="@drawable/bogoc"
             android:text="Xem danh sách" />
-
     </androidx.cardview.widget.CardView>
 </LinearLayout>

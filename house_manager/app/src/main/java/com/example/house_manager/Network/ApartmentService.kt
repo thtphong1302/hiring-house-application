@@ -5,15 +5,11 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApartmentService {
-    @GET("/apartment")
+    @GET("apartments")
     fun getApartments(): Call<List<Apartment>>
 
-    @POST("/apartment")
+    @POST("apartments")
     fun createApartment(@Body apartment: Apartment): Call<Apartment>
-
-    @PUT("/apartment/{name}")
-    suspend fun updateApartment(@Path("name") name: String, @Body apartment: Apartment): Apartment
-
-    @DELETE("/apartment/{name}")
-    fun deleteApartment(@Path("name") name: String): Call<Void>
+    @DELETE("apartments/{apartment_name}")
+    fun deleteApartment(@Path("apartment_name") apartmentName: String): Call<Void>
 }

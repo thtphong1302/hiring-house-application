@@ -5,12 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Model.Apartment
 import com.example.house_manager.R
 
-class ApartmentAdapter: RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
+class ApartmentAdapter(param: (Any) -> Unit) : RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
     private var apartments = emptyList<Apartment>()
     inner class ApartmentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val apartment_name: TextView = itemView.findViewById(R.id.txtNameRoom)
@@ -18,12 +17,10 @@ class ApartmentAdapter: RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolde
             val water_price: TextView = itemView.findViewById(R.id.txtwater)
             val imgbtndelete: ImageButton = itemView.findViewById(R.id.imgbtndelete)
             val imgbtnedit: ImageButton = itemView.findViewById(R.id.imgbtnedit)
-            val txtStk: TextView = itemView.findViewById(R.id.txtstk)
-            val txtNameNH: TextView = itemView.findViewById(R.id.txtnameNH)
-            val txtNameKH: TextView = itemView.findViewById(R.id.txtnameTK)
+
 
     }
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_apartment,parent, false)
             return ApartmentViewHolder(view)
