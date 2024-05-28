@@ -10,6 +10,10 @@ interface ApartmentService {
 
     @POST("apartments")
     fun createApartment(@Body apartment: Apartment): Call<Apartment>
-    @DELETE("apartments/{apartment_name}")
-    fun deleteApartment(@Path("apartment_name") apartmentName: String): Call<Void>
+
+    @DELETE("apartments/{id}")
+    fun deleteApartment(@Path("id") apartmentId: String): Call<Void>
+
+    @PUT("apartments/{apartment_name}")
+    fun updateApartment(@Path("apartment_name") apartmentName: String, @Body apartment: Apartment): Call<Apartment>
 }

@@ -18,6 +18,7 @@ import retrofit2.Response
 
 class AddRoomActivity : AppCompatActivity() {
     private lateinit var retrofitInstance: RetrofitInstance
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_room)
@@ -33,12 +34,12 @@ class AddRoomActivity : AppCompatActivity() {
             val nameApartment = findViewById<EditText>(R.id.edtApartmentName).text.toString()
             val typeName = findViewById<EditText>(R.id.edtRoomType).text.toString()
             val electricPrice = findViewById<EditText>(R.id.edtElectricPrice).text.toString().toIntOrNull()
-            val warterPrice = findViewById<EditText>(R.id.edtWaterPrice).text.toString().toIntOrNull()
+            val waterPrice = findViewById<EditText>(R.id.edtWaterPrice).text.toString().toIntOrNull()
             val servicePrice = findViewById<EditText>(R.id.edtServicePrice).text.toString().toIntOrNull()
             val price = findViewById<EditText>(R.id.edtPrice).text.toString().toIntOrNull()
 
-            if (nameRoom.isNotEmpty() && nameApartment.isNotEmpty() && typeName.isNotEmpty() && warterPrice != null && price != null && electricPrice !=null && servicePrice != null) {
-                val apartment = Apartment(nameApartment,electricPrice,warterPrice)
+            if (nameRoom.isNotEmpty() && nameApartment.isNotEmpty() && typeName.isNotEmpty() && waterPrice != null && price != null && electricPrice != null && servicePrice != null) {
+                val apartment = Apartment(nameApartment, electricPrice, waterPrice)
                 val roomType = Room_type(typeName, servicePrice, price)
                 val room = Room(nameRoom, RoomStatus.EMPTY, apartment, roomType)
                 createRoom(room)
@@ -49,13 +50,15 @@ class AddRoomActivity : AppCompatActivity() {
     }
 
     private fun createRoom(room: Room) {
+
+
         val call: Call<Room> = retrofitInstance.roomService.createRoom(room)
-        call.enqueue(object : Callback<Room>{
+        call.enqueue(object : Callback<Room> {
             override fun onResponse(call: Call<Room>, response: Response<Room>) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     Toast.makeText(this@AddRoomActivity, "Room added successfully!", Toast.LENGTH_SHORT).show()
                     finish() // Close activity after successful submission
-                }else {
+                } else {
                     Toast.makeText(this@AddRoomActivity, "Failed to add room", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -65,7 +68,5 @@ class AddRoomActivity : AppCompatActivity() {
             }
 
         })
-
     }
-
 }

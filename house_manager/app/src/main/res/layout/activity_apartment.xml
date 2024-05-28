@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
+        android:id="@+id/frm3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1573BD">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -26,16 +27,9 @@
             android:src="@drawable/ic_add" />
     </FrameLayout>
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Button" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_below="@id/btn2"
+        android:layout_below="@id/frm3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>

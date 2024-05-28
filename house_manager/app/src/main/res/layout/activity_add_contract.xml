@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#1573BD"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
+
+    <EditText
+        android:id="@+id/editTextManagerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tên quản lý"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Điện thoại"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Địa chỉ"
+        android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/editTextElectricityPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá điện (đ/KWH)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextWaterPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá nước (đ/người hoặc đồng hồ)"
+        android:inputType="numberDecimal" />
+
+    <Spinner
+        android:id="@+id/spinnerPriceType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:id="@+id/editTextServiceFee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phí dịch vụ"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editTextNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ghi chú"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lưu thông tin" />
+
+</LinearLayout>

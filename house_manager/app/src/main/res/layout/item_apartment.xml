@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="265dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp">
 
         <LinearLayout
@@ -16,7 +23,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:background="#0E426C"
+
+            android:background="@drawable/bogoc"
             android:orientation="horizontal">
 
             <ImageView
@@ -27,7 +35,7 @@
                 app:srcCompat="@drawable/cannha" />
 
             <TextView
-                android:id="@+id/txtcannha"
+                android:id="@+id/txtNameRoom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -74,7 +82,7 @@
                 android:gravity="center_vertical"
                 android:text="Điện: 3.500đ/kWH"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +107,7 @@
                 android:gravity="center_vertical"
                 android:text="Nước: 100k/người"
                 android:textColor="@android:color/black"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="STK: 052249900222"
                 android:textColor="#24327C"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtnameTK"
@@ -125,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:text="CHỦ TK:NGUYEN VAN A"
                 android:textColor="#24327C"
-                android:textSize="20sp" />
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/txtnameNH"
@@ -133,10 +141,10 @@
                 android:layout_height="wrap_content"
                 android:text="NH: VIETCOMBANK"
                 android:textColor="#24327C"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnListRoom"
             android:layout_width="203dp"
             android:layout_height="38dp"
@@ -144,5 +152,6 @@
             android:layout_marginTop="100dp"
             android:background="@drawable/bogoc"
             android:text="Xem danh sách" />
+
     </androidx.cardview.widget.CardView>
 </LinearLayout>

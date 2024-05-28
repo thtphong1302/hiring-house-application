@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         launchApartmentActivity()
         // gọi màn hình thống kế
         launchStatisticsActivity()
+
     }
 
     private fun launchApartmentActivity() {

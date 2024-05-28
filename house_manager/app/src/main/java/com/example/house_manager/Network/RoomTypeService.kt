@@ -6,10 +6,10 @@ import retrofit2.http.*
 
 
 interface RoomTypeService {
-    @GET("/room_type")
+    @GET("type_name")
     suspend fun getRoomTypes(): List<Room_type>
 
-    @POST("/room_type")
+    @POST("type_name")
     fun createRoomType(@Body roomType: Room_type): Call<Room_type>
 
     @PUT("/room_type/{name}")
