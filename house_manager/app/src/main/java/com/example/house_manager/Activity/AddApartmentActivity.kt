@@ -100,12 +100,12 @@ class AddApartmentActivity : AppCompatActivity() {
     }
 
     private fun updateApartment(originalName: String, apartment: Apartment) {
-        val call: Call<Apartment> = RetrofitInstance.apartmentService.updateApartment("60c3", apartment)
+        val call: Call<Apartment> = RetrofitInstance.apartmentService.updateApartment(originalName, apartment)
         call.enqueue(object : Callback<Apartment> {
             override fun onResponse(call: Call<Apartment>, response: Response<Apartment>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@AddApartmentActivity, "Apartment updated successfully!", Toast.LENGTH_SHORT).show()
-                        finish()
+                    finish()
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Log.e("API_UPDATE_RESPONSE", "Error: $errorBody")

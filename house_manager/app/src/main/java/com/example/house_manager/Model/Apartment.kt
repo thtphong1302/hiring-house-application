@@ -2,10 +2,14 @@ package com.example.house_manager.Model
 
 
 data class Apartment(
-    val apartment_name: String,
-    val electric_price: Int?,
-    val water_price: Int?
+
+    val departmentName: String,
+    val electricPrice: Int?,
+    val waterPrice: Int?
 )
 
-
+data class ApartmentResponse(
+    val code: Int,
+    val result: List<Apartment>
+)
 

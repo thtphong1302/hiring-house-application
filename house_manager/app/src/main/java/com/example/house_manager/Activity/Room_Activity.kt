@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
@@ -27,7 +28,7 @@ class Room_Activity : AppCompatActivity() {
         setUpTabs()
         // Thiết lập ViewPager và gán adapter
         setUpViewPager()
-        ToolbarHelper.setToolbar(this, "Danh sách các phòng")
+        ToolbarHelper.setToolbar(this, "Danh sách căn phòng")
         initImgAddRoom()
     }
 
@@ -62,5 +63,7 @@ class Room_Activity : AppCompatActivity() {
             startActivity(Intent(this, AddRoomActivity::class.java))
         }
     }
+
+
 
 }

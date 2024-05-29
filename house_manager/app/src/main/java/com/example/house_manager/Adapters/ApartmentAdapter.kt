@@ -5,24 +5,27 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Activity.AddApartmentActivity
 import com.example.house_manager.Activity.Room_Activity
 import com.example.house_manager.Model.Apartment
+import com.example.house_manager.Model.Room
 import com.example.house_manager.R
 
 class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
     private var apartments: List<Apartment> = emptyList()
+    private lateinit var rooms: List<Room>
 
     inner class ApartmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val apartmentName: TextView = itemView.findViewById(R.id.txtNameRoom)
         val electricPrice: TextView = itemView.findViewById(R.id.txtelectric)
         val waterPrice: TextView = itemView.findViewById(R.id.txtwater)
-        val deleteButton: ImageButton = itemView.findViewById(R.id.imgbtndelete)
-        val editButton: ImageButton = itemView.findViewById(R.id.imgbtnedit)
-        val listRoomButton: TextView = itemView.findViewById(R.id.btnListRoom)
+        private val deleteButton: ImageButton = itemView.findViewById(R.id.imgbtndelete)
+        private val editButton: ImageButton = itemView.findViewById(R.id.imgbtnedit)
+        private val listRoomButton: Button = itemView.findViewById(R.id.btnListRoom)
 
         init {
             deleteButton.setOnClickListener {
@@ -39,9 +42,9 @@ class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : Recycle
                     val apartment = apartments[position]
                     val context = itemView.context
                     val intent = Intent(context, AddApartmentActivity::class.java).apply {
-                        putExtra("apartment_name", apartment.apartment_name)
-                        putExtra("electric_price", apartment.electric_price)
-                        putExtra("water_price", apartment.water_price)
+                        putExtra("apartment_name", apartment.departmentName)
+                        putExtra("electric_price", apartment.electricPrice)
+                        putExtra("water_price", apartment.waterPrice)
                     }
                     context.startActivity(intent)
                 }
@@ -63,9 +66,9 @@ class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : Recycle
     override fun onBindViewHolder(holder: ApartmentViewHolder, position: Int) {
         val apartment = apartments[position]
 
-        holder.apartmentName.text = apartment.apartment_name
-        holder.electricPrice.text = apartment.electric_price.toString()
-        holder.waterPrice.text = apartment.water_price.toString()
+        holder.apartmentName.text = apartment.departmentName
+        holder.electricPrice.text = apartment.electricPrice.toString()
+        holder.waterPrice.text = apartment.waterPrice.toString()
     }
 
     override fun getItemCount(): Int = apartments.size

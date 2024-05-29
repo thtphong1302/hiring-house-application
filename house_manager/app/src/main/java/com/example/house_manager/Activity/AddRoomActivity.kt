@@ -6,10 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.house_manager.Helper.ToolbarHelper
-import com.example.house_manager.Model.Apartment
 import com.example.house_manager.Model.Room
 import com.example.house_manager.Model.RoomStatus
-import com.example.house_manager.Model.Room_type
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
 import retrofit2.Call
@@ -31,17 +29,11 @@ class AddRoomActivity : AppCompatActivity() {
         val btnSaveRoom = findViewById<Button>(R.id.btnSaveRoom)
         btnSaveRoom.setOnClickListener {
             val nameRoom = findViewById<EditText>(R.id.edtRoomName).text.toString()
-            val nameApartment = findViewById<EditText>(R.id.edtApartmentName).text.toString()
+            val departmentName = findViewById<EditText>(R.id.edtApartmentName).text.toString()
             val typeName = findViewById<EditText>(R.id.edtRoomType).text.toString()
-            val electricPrice = findViewById<EditText>(R.id.edtElectricPrice).text.toString().toIntOrNull()
-            val waterPrice = findViewById<EditText>(R.id.edtWaterPrice).text.toString().toIntOrNull()
-            val servicePrice = findViewById<EditText>(R.id.edtServicePrice).text.toString().toIntOrNull()
-            val price = findViewById<EditText>(R.id.edtPrice).text.toString().toIntOrNull()
 
-            if (nameRoom.isNotEmpty() && nameApartment.isNotEmpty() && typeName.isNotEmpty() && waterPrice != null && price != null && electricPrice != null && servicePrice != null) {
-                val apartment = Apartment(nameApartment, electricPrice, waterPrice)
-                val roomType = Room_type(typeName, servicePrice, price)
-                val room = Room(nameRoom, RoomStatus.EMPTY, apartment, roomType)
+            if (nameRoom.isNotEmpty() && departmentName.isNotEmpty() && typeName.isNotEmpty() ) {
+                val room = Room(nameRoom,typeName,departmentName,RoomStatus.EMPTY)
                 createRoom(room)
             } else {
                 Toast.makeText(this, "Vui lòng điền đầy đủ thông tin và giá trị hợp lệ.", Toast.LENGTH_SHORT).show()

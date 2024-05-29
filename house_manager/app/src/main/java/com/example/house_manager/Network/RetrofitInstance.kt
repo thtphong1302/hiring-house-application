@@ -1,5 +1,6 @@
 package com.example.house_manager.Network
 
+import RoomService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -7,7 +8,7 @@ object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
                 //http://192.168.1.9:8080/api/v1/
-            .baseUrl("http://192.168.1.16:3000/")
+            .baseUrl("http://192.168.1.9:8080/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
