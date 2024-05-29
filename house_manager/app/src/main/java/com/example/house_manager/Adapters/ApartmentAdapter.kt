@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Activity.AddApartmentActivity
 import com.example.house_manager.Activity.Room_Activity
 import com.example.house_manager.Model.Apartment
-import com.example.house_manager.Model.Room
+import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.R
 
 class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
     private var apartments: List<Apartment> = emptyList()
-    private lateinit var rooms: List<Room>
+    private lateinit var rooms: List<RoomEmpty>
 
     inner class ApartmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val apartmentName: TextView = itemView.findViewById(R.id.txtNameRoom)

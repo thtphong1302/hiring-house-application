@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Adapters.RoomOccupiedAdapter
-import com.example.house_manager.Model.Room
+import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class Room_fragment2 : Fragment() {
     private lateinit var adapter: RoomOccupiedAdapter
-    private val roomsList: ArrayList<Room> = ArrayList()
+    private val roomsList: ArrayList<RoomEmpty> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +42,7 @@ class Room_fragment2 : Fragment() {
         call.enqueue(object : Callback<RoomResponse> {
             override fun onResponse(call: Call<RoomResponse>, response: Response<RoomResponse>) {
                 if (response.isSuccessful) {
-                    val roomList: List<Room>? = response.body()?.result
+                    val roomList: List<RoomEmpty>? = response.body()?.result
                     if (roomList != null && roomList.isNotEmpty()) {
                         roomsList.clear()
                         roomsList.addAll(roomList)

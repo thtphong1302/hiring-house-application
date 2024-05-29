@@ -8,10 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Activity.AddContractActivity
-import com.example.house_manager.Model.Room
+import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.R
 
-class RoomOccupiedAdapter(private var rooms: List<Room>) : RecyclerView.Adapter<RoomOccupiedAdapter.RoomViewHolder>() {
+class RoomOccupiedAdapter(private var rooms: List<RoomEmpty>) : RecyclerView.Adapter<RoomOccupiedAdapter.RoomViewHolder>() {
 
     inner class RoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val roomNameTextView: TextView = itemView.findViewById(R.id.txtNameRoom)
@@ -41,7 +41,7 @@ class RoomOccupiedAdapter(private var rooms: List<Room>) : RecyclerView.Adapter<
 
     override fun getItemCount() = rooms.size
 
-    fun setRooms(rooms: List<Room>) {
+    fun setRooms(rooms: List<RoomEmpty>) {
         this.rooms = rooms
         notifyDataSetChanged()
     }

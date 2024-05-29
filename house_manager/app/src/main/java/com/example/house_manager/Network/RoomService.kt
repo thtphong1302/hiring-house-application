@@ -1,10 +1,9 @@
-import com.example.house_manager.Model.Room
+package com.example.house_manager.Network
+
+import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RoomService {
     @GET("rooms/room-empty")
@@ -14,5 +13,8 @@ interface RoomService {
     fun getDoneRooms(@Query("departmentName") departmentName: String): Call<RoomResponse>
 
     @POST("rooms")
-    fun createRoom(@Body room: Room): Call<Room>
+    fun createRoom(@Body room: RoomEmpty): Call<RoomResponse>
+
+    @DELETE("rooms/{roomName}")
+    fun deleteRoom(@Path("roomName") roomName: String): Call<Void>
 }

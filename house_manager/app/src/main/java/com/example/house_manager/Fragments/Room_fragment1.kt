@@ -9,8 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.house_manager.Adapters.RoomEmptyAdapter
-import com.example.house_manager.Model.*
+import com.example.house_manager.Adapters.RoomAdapter
+import com.example.house_manager.Model.Apartment
+import com.example.house_manager.Model.ApartmentResponse
+import com.example.house_manager.Model.RoomEmpty
+import com.example.house_manager.Model.RoomResponse
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
 import retrofit2.Call
@@ -19,27 +22,69 @@ import retrofit2.Response
 
 class Room_fragment1 : Fragment() {
 
-    private var roomsList: ArrayList<Room> = ArrayList()
-    private var roomTypeList: ArrayList<Room_type> = ArrayList()
-    private lateinit var adapter: RoomEmptyAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: RoomAdapter
     private var apartmentArrayList: ArrayList<Apartment> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_room_fragment1, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_room_fragment1, container, false)
+    }
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewRooms)
-        adapter = RoomEmptyAdapter(roomsList, roomTypeList, apartmentArrayList)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = view.findViewById(R.id.recyclerViewRooms)
+        adapter =
+            RoomAdapter(requireContext(), mutableListOf()) // Initialize adapter with an empty list
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Fetch initial room types
-
-        // Fetch apartments and then fetch empty rooms
+        // Call API to get the list of empty rooms
         getApartments()
-        return view
+    }
+
+    private fun fetchEmptyRooms(departmentNames: List<String>) {
+        for (departmentName in departmentNames) {
+            val call: Call<RoomResponse> =
+                RetrofitInstance.roomService.getEmptyRooms(departmentName)
+            call.enqueue(object : Callback<RoomResponse> {
+                override fun onResponse(
+                    call: Call<RoomResponse>,
+                    response: Response<RoomResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val roomResponse: RoomResponse? = response.body()
+                        val roomList: List<RoomEmpty>? = roomResponse?.result
+
+                        roomList?.let {
+                            adapter.setData(it)
+                        }
+
+
+                    } else {
+                        Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Error fetching data for $departmentName",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
+                    Log.e("API_RESPONSE", "Error: ${t.message}", t)
+                    Toast.makeText(
+                        requireContext(),
+                        "Error fetching data for $departmentName",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+        }
     }
 
     private fun getApartments() {
@@ -74,58 +119,13 @@ class Room_fragment1 : Fragment() {
         })
     }
 
-    private fun fetchEmptyRooms(departmentNames: List<String>) {
-        for (departmentName in departmentNames) {
-            val call: Call<RoomResponse> =
-                RetrofitInstance.roomService.getEmptyRooms(departmentName)
-            call.enqueue(object : Callback<RoomResponse> {
-                override fun onResponse(
-                    call: Call<RoomResponse>,
-                    response: Response<RoomResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val roomResponse: RoomResponse? = response.body()
-                        val roomList: List<Room>? = roomResponse?.result
-
-                        roomList?.let {
-                            if (it.isNotEmpty()) {
-                                roomsList.addAll(it)
-                                adapter.setRooms(roomsList)
-                                Log.d("API_RESPONSE", "Rooms fetched successfully: $it")
-                            } else {
-                                Log.d(
-                                    "API_RESPONSE",
-                                    "No rooms found for department: $departmentName"
-                                )
-                            }
-                        }
-                    } else {
-                        Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
-                        Toast.makeText(
-                            requireContext(),
-                            "Error fetching data for $departmentName",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
-                    Log.e("API_RESPONSE", "Error: ${t.message}", t)
-                    Toast.makeText(
-                        requireContext(),
-                        "Error fetching data for $departmentName",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-        }
-    }
-
     private fun getApartmentNames(apartmentList: List<Apartment>): List<String> {
         val apartmentNames = mutableListOf<String>()
-        for (apartment  in apartmentList) {
+        for (apartment in apartmentList) {
             apartmentNames.add(apartment.departmentName)
         }
         return apartmentNames
     }
+
+
 }

@@ -2,14 +2,13 @@ package com.example.house_manager.Model
 
 data class RoomResponse(
     val code: Int,
-    val result: ArrayList<Room>
+    val result: List<RoomEmpty>
 )
-
-data class Room(
+data class RoomEmpty(
     val roomName: String,
-    val roomType: String,
-    val departmentName: String,
-    val status: RoomStatus
+    val roomTypeResponse: RoomTypeResponse,
+    val department: Apartment,
+    val status: String
 )
 enum class RoomStatus {
     EMPTY,

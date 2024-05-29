@@ -29,7 +29,7 @@ class Room_Activity : AppCompatActivity() {
         // Thiết lập ViewPager và gán adapter
         setUpViewPager()
         ToolbarHelper.setToolbar(this, "Danh sách căn phòng")
-        initImgAddRoom()
+//        initImgAddRoom()
     }
 
     // Hàm này dùng để khởi tạo các thành phần giao diện
@@ -57,12 +57,12 @@ class Room_Activity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
-    private fun initImgAddRoom(){
-        val img = findViewById<ImageView>(R.id.imgAdd_apartment)
-        imgAdd_room.setOnClickListener {
-            startActivity(Intent(this, AddRoomActivity::class.java))
-        }
-    }
+//    private fun initImgAddRoom(){
+//        val img = findViewById<ImageView>(R.id.imgAdd_apartment)
+//        imgAdd_room.setOnClickListener {
+//            startActivity(Intent(this, AddRoomActivity::class.java))
+//        }
+//    }
 
 
 
