@@ -2,6 +2,7 @@ package com.example.hiringhouseapplication.service.impl;
 
 import com.example.hiringhouseapplication.dto.request.ContractRequest;
 import com.example.hiringhouseapplication.dto.response.ContractResponse;
+import com.example.hiringhouseapplication.dto.response.ResidentRegisterResponse;
 import com.example.hiringhouseapplication.dto.response.RoomResponse;
 import com.example.hiringhouseapplication.entity.Contract;
 import com.example.hiringhouseapplication.entity.Room;
@@ -38,7 +39,17 @@ public class ContractServiceImpl implements ContractService {
         Contract contract = contractRepository.findByContractID(contractID).orElseThrow(
                 () -> new ApplicationError(ErrorCode.RESOURCES_NOT_EXIST)
         );
+        var resident = roomRepository.getAllResidentsInRoom(contract.getRoom().getRoomName());
+
+        List<ResidentRegisterResponse> residentRegisterResponses = resident.stream().map(
+                rs -> ResidentRegisterResponse.builder()
+                        .residentName(rs.getResidentName())
+                        .gender(rs.getGender().name())
+                        .phoneNumber(rs.getPhoneNumber())
+                        .build()
+        ).toList();
         RoomResponse response = roomMapper.toRoomResponse(contract.getRoom());
+        response.setResidents(residentRegisterResponses);
 
         return ContractResponse.builder()
                 .contractName(contract.getContractName())
