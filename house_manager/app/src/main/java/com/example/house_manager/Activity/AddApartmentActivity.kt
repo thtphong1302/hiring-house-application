@@ -6,11 +6,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.example.house_manager.Adapters.ApartmentAdapter
 import com.example.house_manager.Helper.ToolbarHelper
 import com.example.house_manager.Model.Apartment
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
+import kotlinx.android.synthetic.main.activity_add_apartment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
+import com.example.house_manager.Fragments.Room_fragment1
+import com.example.house_manager.Fragments.Room_fragment2
 import com.example.house_manager.Helper.ToolbarHelper
 import com.example.house_manager.R
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +23,19 @@ class Room_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
+
+        val apartmentName = intent.getStringExtra("APARTMENT_NAME")
+        val roomType = intent.getStringExtra("ROOM_TYPE")
+
+        if (roomType == "EMPTY") {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frmlayoutHome, Room_fragment1.newInstance(apartmentName))
+                .commit()}
+//        } else if (roomType == "OCCUPIED") {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.frmlayoutRoom, Room_fragment2.newInstance(apartmentName))
+//                .commit()
+//        }
 
         // Thiết lập và cài đặt giao diện
         InitViews()

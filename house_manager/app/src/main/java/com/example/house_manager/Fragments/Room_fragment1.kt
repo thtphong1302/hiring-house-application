@@ -38,50 +38,38 @@ class Room_fragment1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recyclerViewRooms)
-        adapter =
-            RoomAdapter(requireContext(), mutableListOf()) // Initialize adapter with an empty list
+        adapter = RoomAdapter(requireContext(), mutableListOf()) // Initialize adapter with an empty list
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Call API to get the list of empty rooms
-        getApartments()
+        // Nhận tên căn hộ từ Intent và gọi getRoomEmpty
+        val apartmentName = activity?.intent?.getStringExtra("APARTMENT_NAME")
+        apartmentName?.let {
+            fetchEmptyRooms(listOf(it))
+        } ?: getApartments() // Nếu không có tên căn hộ, lấy danh sách căn hộ
+
     }
 
     private fun fetchEmptyRooms(departmentNames: List<String>) {
         for (departmentName in departmentNames) {
-            val call: Call<RoomResponse> =
-                RetrofitInstance.roomService.getEmptyRooms(departmentName)
+            val call: Call<RoomResponse> = RetrofitInstance.roomService.getEmptyRooms(departmentName)
             call.enqueue(object : Callback<RoomResponse> {
-                override fun onResponse(
-                    call: Call<RoomResponse>,
-                    response: Response<RoomResponse>
-                ) {
+                override fun onResponse(call: Call<RoomResponse>, response: Response<RoomResponse>) {
                     if (response.isSuccessful) {
                         val roomResponse: RoomResponse? = response.body()
                         val roomList: List<RoomEmpty>? = roomResponse?.result
-
                         roomList?.let {
                             adapter.setData(it)
                         }
-
-
                     } else {
                         Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
-                        Toast.makeText(
-                            requireContext(),
-                            "Error fetching data for $departmentName",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(requireContext(), "Error fetching data for $departmentName", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
                     Log.e("API_RESPONSE", "Error: ${t.message}", t)
-                    Toast.makeText(
-                        requireContext(),
-                        "Error fetching data for $departmentName",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), "Error fetching data for $departmentName", Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -90,10 +78,7 @@ class Room_fragment1 : Fragment() {
     private fun getApartments() {
         val call: Call<ApartmentResponse> = RetrofitInstance.apartmentService.getApartments()
         call.enqueue(object : Callback<ApartmentResponse> {
-            override fun onResponse(
-                call: Call<ApartmentResponse>,
-                response: Response<ApartmentResponse>
-            ) {
+            override fun onResponse(call: Call<ApartmentResponse>, response: Response<ApartmentResponse>) {
                 if (response.isSuccessful) {
                     val apartmentList: List<Apartment>? = response.body()?.result
                     if (apartmentList != null && apartmentList.isNotEmpty()) {
@@ -127,5 +112,15 @@ class Room_fragment1 : Fragment() {
         return apartmentNames
     }
 
+    companion object {
+        private const val ARG_APARTMENT_NAME = "APARTMENT_NAME"
+        fun newInstance(apartmentName: String?): Room_fragment1 {
+            val fragment = Room_fragment1()
+            val args = Bundle()
+            args.putString(ARG_APARTMENT_NAME, apartmentName)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
 }

@@ -11,7 +11,7 @@
         android:id="@+id/frmlayoutHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1573BD">
+        android:background="#19A898">
 
         <ImageView
             android:id="@+id/imgAdd_room"
@@ -27,8 +27,8 @@
             android:layout_marginLeft="50dp"
             android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="HOUSE_MANAGER"
-            app:titleTextColor="#F44336" />
+            app:title="House_MANAGER"
+            app:titleTextColor="#6C201A" />
 
         <!-- Nút thêm căn hộ -->
 
@@ -39,6 +39,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_below="@id/frmlayoutHome"
         android:orientation="horizontal"
         android:padding="16dp">
@@ -54,8 +55,8 @@
             <!-- Hình ảnh logo -->
             <ImageView
                 android:id="@+id/imgManager"
-                android:layout_width="77dp"
-                android:layout_height="77dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/bogoc"
                 android:src="@drawable/toanha" />
 
@@ -79,8 +80,8 @@
             <!-- Hình ảnh logo -->
             <ImageView
                 android:id="@+id/imgStatistics"
-                android:layout_width="77dp"
-                android:layout_height="77dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:background="@drawable/bogoc"
                 android:contentDescription="Doanhthu Logo"
                 android:src="@drawable/doanhthu" />

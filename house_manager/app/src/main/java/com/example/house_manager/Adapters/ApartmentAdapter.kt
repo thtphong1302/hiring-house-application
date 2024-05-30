@@ -19,6 +19,8 @@ class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : Recycle
     private var apartments: List<Apartment> = emptyList()
     private lateinit var rooms: List<RoomEmpty>
 
+    // Inside ApartmentAdapter
+
     inner class ApartmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val apartmentName: TextView = itemView.findViewById(R.id.txtNameRoom)
         val electricPrice: TextView = itemView.findViewById(R.id.txtelectric)
@@ -51,15 +53,22 @@ class ApartmentAdapter(private val onDeleteClick: (Apartment) -> Unit) : Recycle
             }
 
             listRoomButton.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, Room_Activity::class.java)
-                context.startActivity(intent)
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val apartment = apartments[position]
+                    val context = itemView.context
+                    val intent = Intent(context, Room_Activity::class.java).apply {
+                        putExtra("APARTMENT_NAME", apartment.departmentName)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApartmentViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_apartment, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_apartment, parent, false)
         return ApartmentViewHolder(view)
     }
 

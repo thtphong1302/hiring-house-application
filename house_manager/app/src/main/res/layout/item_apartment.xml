@@ -11,11 +11,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="265dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="207dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,6 +75,15 @@
                 app:srcCompat="@drawable/dien" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Giá điện"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
                 android:id="@+id/txtelectric"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -83,6 +92,15 @@
                 android:text="Điện: 3.500đ/kWH"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="/kWh"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,6 +118,15 @@
                 app:srcCompat="@drawable/nuoc" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Giá nước:"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
                 android:id="@+id/txtwater"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -108,40 +135,14 @@
                 android:text="Nước: 100k/người"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="130dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
             <TextView
-                android:id="@+id/txtstk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="STK: 052249900222"
-                android:textColor="#24327C"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/txtnameTK"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CHỦ TK:NGUYEN VAN A"
-                android:textColor="#24327C"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:id="@+id/txtnameNH"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="NH: VIETCOMBANK"
-                android:textColor="#24327C"
-                android:textSize="18sp" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="/Người"
+                android:textSize="18sp"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -149,7 +150,7 @@
             android:layout_width="203dp"
             android:layout_height="38dp"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/bogoc"
             android:text="Xem danh sách" />
 

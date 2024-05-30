@@ -28,6 +28,7 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
         val txtFeeService: TextView = itemView.findViewById(R.id.txtFeeService)
         val btnContract: Button = itemView.findViewById(R.id.btnContract)
         val imgDel: ImageButton = itemView.findViewById(R.id.imgbtnDelRoom)
+//        val txtNameApartment: TextView = itemView.findViewById((R.id.txtNameApartment))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -38,12 +39,12 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val currentItem = roomList[position]
-
-        holder.txtRoomName.text = currentItem.roomName
-        holder.txtStatus.text = currentItem.status
-        holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse.price}"
-        holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse.feeService}"
-
+//        if(currentItem.department.departmentName == holder.txtNameApartment.text) {
+            holder.txtRoomName.text = currentItem.roomName
+            holder.txtStatus.text = currentItem.status
+            holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse.price}"
+            holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse.feeService}"
+//        }
         holder.btnContract.setOnClickListener {
             // Handle button click action here
         }

@@ -30,7 +30,7 @@ class ApartmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apartment)
-        ToolbarHelper.setToolbar(this, "Danh sách căn hộ")
+        ToolbarHelper.setToolbar(this, "Danh Sách Căn Hộ")
         setupRecyclerView()
         setupButtonListeners()
         initImgAddApartment()
@@ -117,9 +117,15 @@ class ApartmentActivity : AppCompatActivity() {
     private fun setupButtonListeners() {
         val btnListRoom = findViewById<Button>(R.id.btnListRoom)
         btnListRoom?.setOnClickListener {
-            startActivity(Intent(this, Room_Activity::class.java))
+            val apartmentName = "Tên của Apartment" // Thay bằng tên thực tế của Apartment
+            val intent = Intent(this, Room_Activity::class.java).apply {
+                putExtra("APARTMENT_NAME", apartmentName)
+            }
+            startActivity(intent)
         }
     }
+
+
 
     private fun initImgAddApartment() {
         val imgAddApartment = findViewById<ImageView>(R.id.imgAdd_apartment)

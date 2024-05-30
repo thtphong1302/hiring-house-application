@@ -7,7 +7,7 @@
         android:id="@+id/frm3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1573BD">
+        android:background="#19A898">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

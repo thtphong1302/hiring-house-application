@@ -20,32 +20,92 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/botron"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/edtApartmentName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apartment Name" />
+            android:background="@drawable/vien"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtElectricPrice"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#1A5A54"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="Tên Căn Hộ:" />
+
+            <EditText
+                android:id="@+id/edtApartmentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Apartment Name" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Electric Price"
-            android:inputType="number" />
+            android:background="@drawable/vien"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtWaterPrice"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Giá Điện:"
+                android:textColor="#1A5A54"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtElectricPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Electric Price"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Water Price"
-            android:inputType="number" />
+            android:background="@drawable/vien"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-        <Button
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#1A5A54"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="Giá Nước:" />
+
+            <EditText
+                android:id="@+id/edtWaterPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Water Price"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/border"
             android:text="Save" />
     </LinearLayout>
 
