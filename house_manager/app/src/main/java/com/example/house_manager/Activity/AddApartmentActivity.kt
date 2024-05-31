@@ -35,6 +35,8 @@ class AddApartmentActivity : AppCompatActivity() {
         initViews()
         initData()
         setupSaveButton()
+
+
     }
 
     private fun initViews() {

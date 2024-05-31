@@ -17,94 +17,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/bogoc">>
-
-        <!--                <LinearLayout-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:orientation="vertical">-->
-
-        <!--                    <LinearLayout-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="35dp"-->
-        <!--                        android:orientation="horizontal">-->
-
-        <!--                        <LinearLayout-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            android:orientation="vertical"-->
-        <!--                            tools:ignore="MissingConstraints">-->
-
-        <!--                            <TextView-->
-        <!--                                android:id="@+id/txtStart3"-->
-        <!--                                android:layout_width="wrap_content"-->
-        <!--                                android:layout_height="wrap_content"-->
-        <!--                                android:drawableStart="@drawable/ic_person"-->
-        <!--                                android:text=":  "-->
-        <!--                                android:textColor="@color/black"-->
-        <!--                                android:textSize="24dp"-->
-        <!--                                app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                                app:layout_constraintTop_toTopOf="parent" />-->
-        <!--                        </LinearLayout>-->
-
-        <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            tools:ignore="MissingConstraints">-->
-
-        <!--                            <TextView-->
-        <!--                                android:id="@+id/txtResident"-->
-        <!--                                android:layout_width="wrap_content"-->
-        <!--                                android:layout_height="match_parent"-->
-        <!--                                android:gravity="center"-->
-        <!--                                android:textColor="#E80A0A"-->
-        <!--                                android:textSize="24dp"-->
-        <!--                                android:textStyle="bold" />-->
-
-        <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
-        <!--&lt;!&ndash;                    </LinearLayout>&ndash;&gt;-->
-
-
-        <!--                    <LinearLayout-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="35dp"-->
-        <!--                        android:orientation="horizontal">-->
-
-        <!--                        <LinearLayout-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            android:orientation="vertical"-->
-        <!--                            tools:ignore="MissingConstraints">-->
-
-        <!--                            <TextView-->
-        <!--                                android:id="@+id/txtStart4"-->
-        <!--                                android:layout_width="wrap_content"-->
-        <!--                                android:layout_height="wrap_content"-->
-        <!--                                android:drawableStart="@drawable/ic_phone"-->
-        <!--                                android:text=": "-->
-        <!--                                android:textColor="@color/black"-->
-        <!--                                android:textSize="24dp"-->
-        <!--                                app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                                app:layout_constraintTop_toTopOf="parent" />-->
-        <!--                        </LinearLayout>-->
-
-        <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                            android:layout_width="wrap_content"-->
-        <!--                            android:layout_height="match_parent"-->
-        <!--                            tools:ignore="MissingConstraints">-->
-
-        <!--                            <TextView-->
-        <!--                                android:id="@+id/txtSdt"-->
-        <!--                                android:layout_width="wrap_content"-->
-        <!--                                android:layout_height="match_parent"-->
-        <!--                                android:gravity="center"-->
-        <!--                                android:textColor="#E80A0A"-->
-        <!--                                android:textSize="24dp"-->
-        <!--                                android:textStyle="bold" />-->
-        <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
-        <!--                    </LinearLayout>-->
-
-
+        android:background="@drawable/bogoc">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +43,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="235dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -150,19 +63,7 @@
                         android:textSize="20dp"
                         android:textStyle="italic" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/txtSeenContract"
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="9"
-                        android:background="@drawable/layout_button_contract"
-                        android:gravity="center"
-                        android:text="Hợp đồng"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:textStyle="italic" />
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -178,8 +79,8 @@
 
                         <TextView
                             android:id="@+id/txtStart2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="65dp"
+                            android:layout_height="match_parent"
                             android:drawableStart="@drawable/ic_money"
                             android:text=": "
                             android:textColor="@color/black"
@@ -195,8 +96,8 @@
 
                         <TextView
                             android:id="@+id/txtFeeRoom"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_width="65dp"
+                            android:layout_height="32dp"
                             android:gravity="center"
                             android:text="20000"
                             android:textColor="#651515"
@@ -206,8 +107,8 @@
 
                         <TextView
                             android:id="@+id/txtVND2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="51dp"
+                            android:layout_height="24dp"
                             android:layout_marginStart="4dp"
                             android:gravity="bottom"
                             android:hint="VND"
@@ -223,7 +124,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnHistoryFee"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="27dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
@@ -234,7 +135,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFeeMonth"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="29dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"

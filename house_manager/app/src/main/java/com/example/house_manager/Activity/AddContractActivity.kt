@@ -1,12 +1,18 @@
 package com.example.house_manager.Activity
 
+import RoomAdapter
 import android.app.DatePickerDialog
+import android.content.pm.PackageManager
+import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.house_manager.Helper.ToolbarHelper
 import com.example.house_manager.Model.Contract
 import com.example.house_manager.Model.Resident
@@ -14,16 +20,23 @@ import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+
+import kotlinx.android.synthetic.main.activity_add_contract.*
+
+
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 class AddContractActivity : AppCompatActivity() {
-
+    private val REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1
     private lateinit var edtResidentName: EditText
     private lateinit var edtPhoneNumber: EditText
     private lateinit var spinnerGender: Spinner
@@ -36,6 +49,8 @@ class AddContractActivity : AppCompatActivity() {
     private lateinit var edtRoomNameInContract: TextView
     private lateinit var startDateData: LocalDate
     private lateinit var endDateData: LocalDate
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +73,15 @@ class AddContractActivity : AppCompatActivity() {
         // Set up DatePickers and Spinner
         setupDatePickers()
         setupGenderSpinner()
+        // xử lý PDF
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_WRITE_EXTERNAL_STORAGE)
+        }
+
+        // Thiết lập sự kiện cho nút xuất PDF
+        btnPDF.setOnClickListener {
+            createPdf()
+        }
     }
 
     private fun initViews() {
@@ -213,7 +237,6 @@ class AddContractActivity : AppCompatActivity() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                                 // Finish the activity if needed
-                                                finish()
                                             } else {
                                                 // Handle failure when sending create Contract request
                                                 Toast.makeText(
@@ -266,5 +289,41 @@ class AddContractActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun createPdf() {
+        val contractView = findViewById<View>(R.id.contractPDF)
+        val width = contractView.width
+        val height = contractView.height
+
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
+        val page = document.startPage(pageInfo)
+
+        // Vẽ nội dung của layout lên trang PDF
+        contractView.draw(page.canvas)
+
+        // Kết thúc trang
+        document.finishPage(page)
+        val roomName = intent.getStringExtra("ROOM_NAME")
+        // Lưu tài liệu PDF vào bộ nhớ thiết bị
+        val directoryPath = Environment.getExternalStorageDirectory().path + "/mypdf/contract/"
+        val filePath = "$directoryPath$roomName.pdf"
+        val file = File(directoryPath)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+
+        try {
+            document.writeTo(FileOutputStream(filePath))
+            Toast.makeText(this, "PDF được tạo thành công", Toast.LENGTH_SHORT).show()
+            finish()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(this, "Lỗi khi tạo PDF: " + e.message, Toast.LENGTH_SHORT).show()
+        }
+
+        // Đóng tài liệu PDF
+        document.close()
+
     }
 }

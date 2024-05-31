@@ -1,16 +1,20 @@
 package com.example.house_manager.Activity
 
+import RoomAdapter
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.house_manager.Helper.ToolbarHelper
 import com.example.house_manager.Model.Room
 import com.example.house_manager.Model.RoomType
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
+import kotlinx.android.synthetic.main.activity_apartment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +33,8 @@ class AddRoomActivity : AppCompatActivity() {
         departmentName = intent.getStringExtra("APARTMENT_NAME") ?: ""
         val edtApartmentName = findViewById<EditText>(R.id.edtApartmentName)
         edtApartmentName.setText(departmentName)
+
+
 
         setOnClickBtnSaveRoom()
         setupSpinner()

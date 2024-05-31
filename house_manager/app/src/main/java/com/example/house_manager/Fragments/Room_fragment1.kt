@@ -22,7 +22,7 @@ import retrofit2.Response
 class Room_fragment1 : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RoomAdapter
+    private lateinit var adapterEmpty: RoomAdapter
     private var apartmentArrayList: ArrayList<Apartment> = ArrayList()
 
     override fun onCreateView(
@@ -37,8 +37,8 @@ class Room_fragment1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recyclerViewRooms)
-        adapter = RoomAdapter(requireContext(), mutableListOf()) // Initialize adapter with an empty list
-        recyclerView.adapter = adapter
+        adapterEmpty = RoomAdapter(requireContext(), mutableListOf()) // Initialize adapter with an empty list
+        recyclerView.adapter = adapterEmpty
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Nhận tên căn hộ từ Intent và gọi getRoomEmpty
@@ -59,7 +59,7 @@ class Room_fragment1 : Fragment() {
                         val roomResponse: RoomResponse? = response.body()
                         val roomList: List<RoomEmpty>? = roomResponse?.result
                         roomList?.let {
-                            adapter.setData(it)
+                            adapterEmpty.setData(it)
                         }
                     } else {
                         Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
@@ -72,6 +72,7 @@ class Room_fragment1 : Fragment() {
                     Toast.makeText(requireContext(), "Error fetching data for $departmentName", Toast.LENGTH_SHORT).show()
                 }
             })
+
         }
     }
 

@@ -20,7 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Room_fragment2 : Fragment() {
-    private lateinit var adapter: RoomOccupiedAdapter
+    private lateinit var adapterOccupiedAdapter: RoomOccupiedAdapter
     private val roomsList: ArrayList<RoomEmpty> = ArrayList()
 
     override fun onCreateView(
@@ -30,8 +30,8 @@ class Room_fragment2 : Fragment() {
         val view = inflater.inflate(R.layout.fragment_room_fragment2, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewOccupied)
-        adapter = RoomOccupiedAdapter(roomsList)
-        recyclerView.adapter = adapter
+        adapterOccupiedAdapter = RoomOccupiedAdapter(roomsList)
+        recyclerView.adapter = adapterOccupiedAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val apartmentName = activity?.intent?.getStringExtra("APARTMENT_NAME")
@@ -55,7 +55,7 @@ class Room_fragment2 : Fragment() {
                         val roomList: List<RoomEmpty>? = roomResponse?.result
                         roomList?.let {
                             roomsList.addAll(it) // Thêm dữ liệu từ mỗi cuộc gọi API vào danh sách
-                            adapter.setRooms(roomsList) // Cập nhật dữ liệu cho Adapter
+                            adapterOccupiedAdapter.setRooms(roomsList) // Cập nhật dữ liệu cho Adapter
                         }
                     } else {
                         Log.d("API_RESPONSE", "No rooms found")
