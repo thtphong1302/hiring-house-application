@@ -96,8 +96,8 @@
 
                         <TextView
                             android:id="@+id/txtFeeRoom"
-                            android:layout_width="65dp"
-                            android:layout_height="32dp"
+                            android:layout_width="117dp"
+                            android:layout_height="35dp"
                             android:gravity="center"
                             android:text="20000"
                             android:textColor="#651515"
@@ -107,8 +107,8 @@
 
                         <TextView
                             android:id="@+id/txtVND2"
-                            android:layout_width="51dp"
-                            android:layout_height="24dp"
+                            android:layout_width="104dp"
+                            android:layout_height="29dp"
                             android:layout_marginStart="4dp"
                             android:gravity="bottom"
                             android:hint="VND"
