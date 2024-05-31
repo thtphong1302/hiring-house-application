@@ -16,17 +16,17 @@ class RoomOccupiedAdapter(private var rooms: List<RoomEmpty>) : RecyclerView.Ada
     inner class RoomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val roomNameTextView: TextView = itemView.findViewById(R.id.txtNameRoom)
         val statusTextView: TextView = itemView.findViewById(R.id.txtStatus)
-        val txtSdt: TextView = itemView.findViewById(R.id.txtSdt)
-        val txtNameResident: TextView = itemView.findViewById(R.id.txtResident)
-        private val txtSemContract: TextView = itemView.findViewById(R.id.txtSeenContract)
+        val roomPrice: TextView = itemView.findViewById(R.id.txtFeeRoom)
+//        val txtSdt: TextView = itemView.findViewById(R.id.txtSdt)
+//        val txtNameResident: TextView = itemView.findViewById(R.id.txtResident)
+//        private val txtSemContract: TextView = itemView.findViewById(R.id.txtSeenContract)
         init {
-            txtSemContract.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, AddContractActivity::class.java)
-                context.startActivity(intent)
+//            txtSemContract.setOnClickListener {
+//                val context = itemView.context
+//                val intent = Intent(context, AddContractActivity::class.java)
+//                context.startActivity(intent)
             }
         }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_roomoccupied, parent, false)
@@ -36,7 +36,8 @@ class RoomOccupiedAdapter(private var rooms: List<RoomEmpty>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val currentRoom = rooms[position]
         holder.roomNameTextView.text = currentRoom.roomName
-        holder.statusTextView.text = currentRoom.status.toString()
+        holder.statusTextView.text = currentRoom.status
+        holder.roomPrice.text = currentRoom.roomTypeResponse.price.toString()
 
     }
 

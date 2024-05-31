@@ -100,7 +100,7 @@
                         android:text="Phí dịch vụ:" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnContract"
+                        android:id="@+id/btnCreateContract"
                         android:layout_width="133dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center"

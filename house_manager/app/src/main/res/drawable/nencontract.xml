@@ -1,0 +1,5 @@
+<!-- background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#E1DADA" /> <!-- Màu nền của CardView -->
+    <corners android:radius="6dp" /> <!-- Bán kính bo góc -->
+</shape>

@@ -62,6 +62,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    // PDF
+    implementation 'com.itextpdf:itext7-core:7.1.11'
+    implementation 'androidx.core:core-ktx:1.6.0'
 
 
 

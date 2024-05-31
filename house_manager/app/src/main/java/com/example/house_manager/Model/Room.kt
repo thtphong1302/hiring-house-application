@@ -14,3 +14,8 @@ enum class RoomStatus {
     EMPTY,
     DONE
 }
+data class Room(
+    val roomName: String,
+    val roomType: String,
+    val departmentName: String
+)

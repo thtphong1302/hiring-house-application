@@ -4,60 +4,49 @@ import RoomAdapterFragment
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
-import com.example.house_manager.Fragments.Room_fragment1
-import com.example.house_manager.Fragments.Room_fragment2
 import com.example.house_manager.Helper.ToolbarHelper
+import com.example.house_manager.Model.Apartment
+import com.example.house_manager.Model.RoomResponse
 import com.example.house_manager.R
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_room.*
 
 class Room_Activity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
+    private lateinit var departmentName: String // Khai báo biến để lưu trữ tên của căn hộ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
-
-        val apartmentName = intent.getStringExtra("APARTMENT_NAME")
-        val roomType = intent.getStringExtra("ROOM_TYPE")
-
-        if (roomType == "EMPTY") {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frmlayoutHome, Room_fragment1.newInstance(apartmentName))
-                .commit()}
-//        } else if (roomType == "OCCUPIED") {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.frmlayoutRoom, Room_fragment2.newInstance(apartmentName))
-//                .commit()
-//        }
-
+// Ví dụ: có thể lấy từ Intent hoặc từ nguồn dữ liệu khác
         // Thiết lập và cài đặt giao diện
         InitViews()
         // Thiết lập tab cho TabLayout
         setUpTabs()
         // Thiết lập ViewPager và gán adapter
         setUpViewPager()
-        ToolbarHelper.setToolbar(this, "Danh sách căn phòng")
-//        initImgAddRoom()
-    }
+        // Thiết lập Toolbar
+        ToolbarHelper.setToolbar(this, "Danh sách căn phòng")
 
+        // Thiết lập sự kiện khi nhấn vào ImageView imgAdd_room
+        initImgAddRoom()
+    }
     // Hàm này dùng để khởi tạo các thành phần giao diện
     private fun InitViews() {
         tabLayout = findViewById(R.id.tabRoom)
         viewPager = findViewById(R.id.pagerRoom)
     }
+
     // Hàm này dùng để thiết lập tab cho TabLayout
     private fun setUpTabs() {
         tabLayout.addTab(tabLayout.newTab().setText("Phòng Trống"))
         tabLayout.addTab(tabLayout.newTab().setText("Phòng Đã Thuê"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
     }
+
     // Hàm này dùng để thiết lập ViewPager và gán adapter
     private fun setUpViewPager() {
         val adapter = RoomAdapterFragment(this, supportFragmentManager, tabLayout.tabCount)
@@ -72,13 +61,13 @@ class Room_Activity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
-//    private fun initImgAddRoom(){
-//        val img = findViewById<ImageView>(R.id.imgAdd_apartment)
-//        imgAdd_room.setOnClickListener {
-//            startActivity(Intent(this, AddRoomActivity::class.java))
-//        }
-//    }
 
-
-
+    // Hàm này dùng để thiết lập sự kiện khi nhấn vào ImageView imgAdd_room
+    private fun initImgAddRoom() {
+        val imgAddroom = findViewById<ImageView>(R.id.imgAddroom)
+        imgAddroom.setOnClickListener {
+            val intent = Intent(this, AddRoomActivity::class.java)
+            startActivity(intent)
+        }
+    }
 }

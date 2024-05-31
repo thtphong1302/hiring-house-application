@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Adapters.RoomOccupiedAdapter
+import com.example.house_manager.Fragments.ApiUtils.getApartmentNames
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
 import com.example.house_manager.Network.RetrofitInstance
@@ -33,34 +34,40 @@ class Room_fragment2 : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        getDoneRoom("NGUYEN DINH GIAP")
+        val apartmentName = activity?.intent?.getStringExtra("APARTMENT_NAME")
+        apartmentName?.let {
+            getDoneRoom(listOf(it))
+        } ?: ApiUtils.getApartments { apartmentList ->
+            val apartmentNames = getApartmentNames(apartmentList)
+            getDoneRoom(apartmentNames)
+        }
+
         return view
     }
 
-    private fun getDoneRoom(departmentName: String) {
-        val call: Call<RoomResponse> = RetrofitInstance.roomService.getDoneRooms(departmentName)
-        call.enqueue(object : Callback<RoomResponse> {
-            override fun onResponse(call: Call<RoomResponse>, response: Response<RoomResponse>) {
-                if (response.isSuccessful) {
-                    val roomList: List<RoomEmpty>? = response.body()?.result
-                    if (roomList != null && roomList.isNotEmpty()) {
-                        roomsList.clear()
-                        roomsList.addAll(roomList)
-                        adapter.setRooms(roomsList)
-                        Log.d("API_RESPONSE", "Rooms fetched successfully: $roomList")
+    private fun getDoneRoom(departmentNames: List<String>) {
+        for (departmentName in departmentNames) {
+            val call: Call<RoomResponse> = RetrofitInstance.roomService.getDoneRooms(departmentName)
+            call.enqueue(object : Callback<RoomResponse> {
+                override fun onResponse(call: Call<RoomResponse>, response: Response<RoomResponse>) {
+                    if (response.isSuccessful) {
+                        val roomResponse: RoomResponse? = response.body()
+                        val roomList: List<RoomEmpty>? = roomResponse?.result
+                        roomList?.let {
+                            roomsList.addAll(it) // Thêm dữ liệu từ mỗi cuộc gọi API vào danh sách
+                            adapter.setRooms(roomsList) // Cập nhật dữ liệu cho Adapter
+                        }
                     } else {
                         Log.d("API_RESPONSE", "No rooms found")
                     }
-                } else {
-                    Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
+                }
+
+                override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
+                    Log.e("API_RESPONSE", "Error: ${t.message}", t)
                     Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT).show()
                 }
-            }
-
-            override fun onFailure(call: Call<RoomResponse>, t: Throwable) {
-                Log.e("API_RESPONSE", "Error: ${t.message}", t)
-                Toast.makeText(requireContext(), "Error fetching data", Toast.LENGTH_SHORT).show()
-            }
-        })
+            })
+        }
     }
+
 }

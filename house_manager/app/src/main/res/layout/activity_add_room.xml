@@ -5,81 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.AddRoomActivity">
+    tools:context=".Activity.AddApartmentActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#4B9F7D"
+        android:background="#469A90"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Thêm mới phòng" />
+        app:title="" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/botron"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/edtApartmentName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên căn hộ" />
+            android:background="@drawable/vien"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtServicePrice"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#1A5A54"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:text="Tên Căn Hộ:" />
+
+            <EditText
+                android:id="@+id/edtApartmentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Apartment Name" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phí Dịch Vụ"
-            android:inputType="numberDecimal" />
+            android:background="@drawable/vien"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Giá Phòng"
-            android:inputType="numberDecimal" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="124dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Tên Phòng:"
+                android:textColor="#1A5A54"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtWaterPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phí Dịch Vụ"
-            android:inputType="numberDecimal" />
+            <EditText
+                android:id="@+id/edtRoomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Tên phòng"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edtElectricPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Giá Phòng"
-            android:inputType="numberDecimal" />
+        <LinearLayout
+            android:layout_width="233dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/vien"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtRoomName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tên phòng" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="Loại Phòng"
+                android:textColor="#1A5A54"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edtRoomStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Trạng thái phòng" />
+            <Spinner
+                android:id="@+id/spinnerRoomType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/edtRoomType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Loại phòng" />
+        </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSaveRoom"
             android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
-            android:text="Lưu" />
-
+            android:background="@drawable/border"
+            android:text="Save" />
     </LinearLayout>
 
 </LinearLayout>

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.house_manager.Adapters.RoomAdapter
 import com.example.house_manager.Model.Apartment
-import com.example.house_manager.Model.ApartmentResponse
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
 import com.example.house_manager.Network.RetrofitInstance
@@ -46,8 +45,9 @@ class Room_fragment1 : Fragment() {
         val apartmentName = activity?.intent?.getStringExtra("APARTMENT_NAME")
         apartmentName?.let {
             fetchEmptyRooms(listOf(it))
-        } ?: getApartments() // Nếu không có tên căn hộ, lấy danh sách căn hộ
-
+        } ?: ApiUtils.getApartments { apartmentList ->
+            fetchEmptyRooms(apartmentList.map { it.departmentName })
+        }
     }
 
     private fun fetchEmptyRooms(departmentNames: List<String>) {
@@ -72,54 +72,6 @@ class Room_fragment1 : Fragment() {
                     Toast.makeText(requireContext(), "Error fetching data for $departmentName", Toast.LENGTH_SHORT).show()
                 }
             })
-        }
-    }
-
-    private fun getApartments() {
-        val call: Call<ApartmentResponse> = RetrofitInstance.apartmentService.getApartments()
-        call.enqueue(object : Callback<ApartmentResponse> {
-            override fun onResponse(call: Call<ApartmentResponse>, response: Response<ApartmentResponse>) {
-                if (response.isSuccessful) {
-                    val apartmentList: List<Apartment>? = response.body()?.result
-                    if (apartmentList != null && apartmentList.isNotEmpty()) {
-                        apartmentArrayList.clear()
-                        apartmentArrayList.addAll(apartmentList)
-
-                        // Get the list of department names from the apartment list
-                        val departmentNames = getApartmentNames(apartmentList)
-
-                        // After having the list of department names, call fetchEmptyRooms
-                        fetchEmptyRooms(departmentNames)
-                    } else {
-                        Log.d("API_RESPONSE", "No apartments found.")
-                    }
-                } else {
-                    Log.e("API_RESPONSE", "Error: ${response.errorBody()?.string()}")
-                }
-            }
-
-            override fun onFailure(call: Call<ApartmentResponse>, t: Throwable) {
-                Log.e("API_RESPONSE", "Error: ${t.message}", t)
-            }
-        })
-    }
-
-    private fun getApartmentNames(apartmentList: List<Apartment>): List<String> {
-        val apartmentNames = mutableListOf<String>()
-        for (apartment in apartmentList) {
-            apartmentNames.add(apartment.departmentName)
-        }
-        return apartmentNames
-    }
-
-    companion object {
-        private const val ARG_APARTMENT_NAME = "APARTMENT_NAME"
-        fun newInstance(apartmentName: String?): Room_fragment1 {
-            val fragment = Room_fragment1()
-            val args = Bundle()
-            args.putString(ARG_APARTMENT_NAME, apartmentName)
-            fragment.arguments = args
-            return fragment
         }
     }
 

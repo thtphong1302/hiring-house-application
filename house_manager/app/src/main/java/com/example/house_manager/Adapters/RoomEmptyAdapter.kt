@@ -1,16 +1,21 @@
 package com.example.house_manager.Adapters
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.house_manager.Activity.AddApartmentActivity
+import com.example.house_manager.Activity.AddContractActivity
+import com.example.house_manager.Activity.AddRoomActivity
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
@@ -26,9 +31,8 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
         val txtStatus: TextView = itemView.findViewById(R.id.txtStatus)
         val txtFeeRoom: TextView = itemView.findViewById(R.id.txtFeeRoom)
         val txtFeeService: TextView = itemView.findViewById(R.id.txtFeeService)
-        val btnContract: Button = itemView.findViewById(R.id.btnContract)
+        val btnContract: Button = itemView.findViewById(R.id.btnCreateContract)
         val imgDel: ImageButton = itemView.findViewById(R.id.imgbtnDelRoom)
-//        val txtNameApartment: TextView = itemView.findViewById((R.id.txtNameApartment))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -39,18 +43,25 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val currentItem = roomList[position]
-//        if(currentItem.department.departmentName == holder.txtNameApartment.text) {
-            holder.txtRoomName.text = currentItem.roomName
-            holder.txtStatus.text = currentItem.status
-            holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse.price}"
-            holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse.feeService}"
-//        }
+        holder.txtRoomName.text = currentItem.roomName
+        holder.txtStatus.text = currentItem.status
+        holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse.price}"
+        holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse.feeService}"
+
+
         holder.btnContract.setOnClickListener {
-            // Handle button click action here
+            val intent = Intent(context, AddContractActivity::class.java).apply {
+//                putExtra("apartment_name", currentItem.department.departmentName)
+//                putExtra("electric_price", currentItem.roomTypeResponse.electricPrice)
+//                putExtra("water_price", currentItem.roomTypeResponse.waterPrice)
+            }
+            context.startActivity(intent)
         }
+
         holder.imgDel.setOnClickListener {
             confirmDeleteRoom(currentItem.roomName, position)
         }
+
     }
 
     override fun getItemCount(): Int {

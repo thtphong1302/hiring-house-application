@@ -42,8 +42,8 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="Tên căn nhà"
-                android:textColor="@android:color/white"
-                android:textSize="23sp" />
+                android:textColor="#5C0505"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/imgbtnedit"
