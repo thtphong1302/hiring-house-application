@@ -39,6 +39,7 @@
                 android:textSize="20dp"
                 android:textColor="#1A5A54"
                 android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
                 android:textStyle="bold"
                 android:text="Tên Căn Hộ:" />
 
@@ -46,6 +47,8 @@
                 android:id="@+id/edtApartmentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:hint="Apartment Name" />
         </LinearLayout>
 
@@ -101,10 +104,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSaveRoom"
-            android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_width="134dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bogoc"
+            android:layout_gravity="center"
             android:text="Save" />
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.example.house_manager.Activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,19 +21,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class ApartmentActivity : AppCompatActivity() {
 
     private lateinit var apartmentAdapter: ApartmentAdapter
     private var apartmentArrayList: ArrayList<Apartment> = ArrayList()
 
+    companion object {
+        const val REQUEST_CODE_ADD_ROOM = 1
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_apartment)
         ToolbarHelper.setToolbar(this, "Danh Sách Căn Hộ")
         setupRecyclerView()
-        setupButtonListeners()
         initImgAddApartment()
         getApartments()
     }
@@ -41,6 +42,14 @@ class ApartmentActivity : AppCompatActivity() {
         super.onResume()
         getApartments()
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_ADD_ROOM && resultCode == Activity.RESULT_OK) {
+            // Đã thêm phòng thành công, cập nhật lại danh sách phòng
+            getApartments()
+        }
+    }
+
 
     private fun getApartments() {
         val call: Call<ApartmentResponse> = RetrofitInstance.apartmentService.getApartments()
@@ -68,10 +77,6 @@ class ApartmentActivity : AppCompatActivity() {
             }
         })
     }
-
-
-
-
 
     private fun deleteApartment(apartment: Apartment) {
         // Create an AlertDialog to confirm deletion
@@ -105,7 +110,6 @@ class ApartmentActivity : AppCompatActivity() {
             .show()
     }
 
-
     private fun setupRecyclerView() {
         apartmentAdapter = ApartmentAdapter { apartment -> deleteApartment(apartment) }
         findViewById<RecyclerView>(R.id.recyclerView).apply {
@@ -114,19 +118,6 @@ class ApartmentActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupButtonListeners() {
-        val btnListRoom = findViewById<Button>(R.id.btnListRoom)
-        btnListRoom?.setOnClickListener {
-            val apartmentName = "Tên của Apartment" // Thay bằng tên thực tế của Apartment
-            val intent = Intent(this, Room_Activity::class.java).apply {
-                putExtra("APARTMENT_NAME", apartmentName)
-            }
-            startActivity(intent)
-        }
-    }
-
-
-
     private fun initImgAddApartment() {
         val imgAddApartment = findViewById<ImageView>(R.id.imgAdd_apartment)
         imgAddApartment?.setOnClickListener {
@@ -134,4 +125,3 @@ class ApartmentActivity : AppCompatActivity() {
         }
     }
 }
-

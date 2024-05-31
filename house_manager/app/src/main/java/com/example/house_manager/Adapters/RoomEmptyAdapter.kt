@@ -1,6 +1,3 @@
-package com.example.house_manager.Adapters
-
-import com.example.house_manager.Activity.AddContractActivity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.house_manager.Activity.AddContractActivity
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R

@@ -81,7 +81,6 @@ class AddContractActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupDatePickers() {
         val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-
         val dateSetListenerStart =
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 // Tạo đối tượng LocalDate từ ngày được chọn
@@ -89,7 +88,6 @@ class AddContractActivity : AppCompatActivity() {
                 // Định dạng lại ngày và gán vào EditText cho ngày bắt đầu
                 edtStartDate.setText(startDateData.format(dateFormat))
             }
-
         val dateSetListenerEnd = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             // Tạo đối tượng LocalDate từ ngày được chọn
             endDateData = LocalDate.of(year, month + 1, dayOfMonth)
@@ -146,6 +144,8 @@ class AddContractActivity : AppCompatActivity() {
     private fun createResidentAndContract() {
         // Get data from input fields
         val residentName = edtResidentName.text.toString()
+       val EndDate = edtEndDate.text.toString()
+        val StartDate = edtStartDate.text.toString()
         val phoneNumber = try {
             edtPhoneNumber.text.toString().toInt()
         } catch (e: NumberFormatException) {
@@ -190,8 +190,8 @@ class AddContractActivity : AppCompatActivity() {
                                     // Create Contract object from input data
                                     val contract = Contract(
                                         contractName,
-                                        startDateData,
-                                        endDateData,
+                                        StartDate,
+                                        EndDate,
                                         description,
                                         numberPersons,
                                         roomNameInContract

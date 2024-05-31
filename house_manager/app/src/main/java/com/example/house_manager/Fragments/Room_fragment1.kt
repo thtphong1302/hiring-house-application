@@ -1,5 +1,6 @@
 package com.example.house_manager.Fragments
 
+import RoomAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.house_manager.Adapters.RoomAdapter
 import com.example.house_manager.Model.Apartment
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
@@ -74,5 +74,6 @@ class Room_fragment1 : Fragment() {
             })
         }
     }
+
 
 }

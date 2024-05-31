@@ -1,11 +1,14 @@
 package com.example.house_manager.Activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.house_manager.Helper.ToolbarHelper
-import com.example.house_manager.Model.*
+import com.example.house_manager.Model.Room
+import com.example.house_manager.Model.RoomType
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
 import retrofit2.Call
@@ -22,7 +25,8 @@ class AddRoomActivity : AppCompatActivity() {
         ToolbarHelper.setToolbar(this, "Thêm Phòng")
         retrofitInstance = RetrofitInstance
 
-        departmentName = intent.getStringExtra("DEPARTMENT_NAME") ?: ""
+        // Nhận tên căn hộ từ Intent
+        departmentName = intent.getStringExtra("APARTMENT_NAME") ?: ""
         val edtApartmentName = findViewById<EditText>(R.id.edtApartmentName)
         edtApartmentName.setText(departmentName)
 
@@ -52,21 +56,23 @@ class AddRoomActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@AddRoomActivity, "Thêm Phòng Thành Công", Toast.LENGTH_SHORT).show()
+                    // Trả về kết quả cho Room_Activity
+                    val resultIntent = Intent()
+                    setResult(Activity.RESULT_OK, resultIntent)
                     finish()
                 } else {
                     // Log the error message
-                    Log.e("CREATE_ROOM_ERROR", "Failed to add room: ${response.code()}")
                     Toast.makeText(this@AddRoomActivity, "Failed to add room", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 // Log the exception message
-                Log.e("CREATE_ROOM_ERROR", "An error occurred: ${t.message}", t)
                 Toast.makeText(this@AddRoomActivity, "An error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
+
 
     private fun setupSpinner() {
         val spinnerRoomType = findViewById<Spinner>(R.id.spinnerRoomType)

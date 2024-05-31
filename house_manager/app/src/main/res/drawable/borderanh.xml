@@ -1,0 +1,8 @@
+<!-- border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" />
+    <stroke
+        android:width="50dp"
+        android:color="#C4C0C6" /> <!-- Màu viền bạn muốn -->
+    <corners android:radius="50dp" /> <!-- Bán kính bo góc -->
+</shape>
