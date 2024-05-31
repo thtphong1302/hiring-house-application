@@ -19,6 +19,7 @@
             android:name=".Activity.AddContractActivity"
             android:exported="false"
             android:parentActivityName=".Activity.Room_Activity"/>
+
         <activity
             android:name=".Activity.Statistics_Activity"
             android:exported="false"

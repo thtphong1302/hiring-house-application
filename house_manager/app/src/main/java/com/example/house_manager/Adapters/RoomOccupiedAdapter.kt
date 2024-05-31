@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.house_manager.Activity.AddContractActivity
 import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.R
 
@@ -23,7 +22,7 @@ class RoomOccupiedAdapter(private var rooms: List<RoomEmpty>) : RecyclerView.Ada
         init {
 //            txtSemContract.setOnClickListener {
 //                val context = itemView.context
-//                val intent = Intent(context, AddContractActivity::class.java)
+//                val intent = Intent(context, com.example.house_manager.Activity.AddContractActivity::class.java)
 //                context.startActivity(intent)
             }
         }

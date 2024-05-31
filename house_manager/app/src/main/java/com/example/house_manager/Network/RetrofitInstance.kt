@@ -1,7 +1,11 @@
 package com.example.house_manager.Network
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 
 object RetrofitInstance {
     private val retrofit by lazy {

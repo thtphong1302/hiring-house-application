@@ -1,9 +1,8 @@
 package com.example.house_manager.Model
 
 data class Resident(
-    val identity_number: String,
-    val gender: Boolean,
-    val phone_number: String,
-    val resident_name: String,
-    val room_id: String
+    val residentName: String,
+    val phoneNumber: Int,
+    val gender: String,
+    val roomName: String
 )

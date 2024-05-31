@@ -16,9 +16,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="593dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/vien"
         android:orientation="vertical">
@@ -26,21 +26,50 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bogoc"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
+            android:background="@drawable/bogoc"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtTenPhong"
-                android:layout_width="match_parent"
+                android:layout_width="122dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="TEN PHÒNG"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/nencontract"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="30dp"
-                android:textStyle="bold"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="TEN PHÒNG" />
+                android:text="Tên hợp đồng:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/edtNameContract"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="TÊN HỢP ĐỒNG" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +95,7 @@
 
                 <EditText
                     android:id="@+id/editTextTextPersonName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="186dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
@@ -74,6 +103,7 @@
                     android:text="Name" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,16 +114,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="89dp"
+                    android:id="@+id/txtGioiTinh"
+                    android:layout_width="101dp"
                     android:layout_height="43dp"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Giới tính" />
+                    android:gravity="center"
+                    android:text="Giới tính"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
 
                 <Spinner
                     android:id="@+id/spinerGender"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
             </LinearLayout>
         </LinearLayout>
@@ -184,13 +219,13 @@
 
             <EditText
                 android:id="@+id/edtDateStart"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Ngày bắt đầu"
-                android:inputType="textPersonName" />
-
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -210,45 +245,16 @@
 
             <EditText
                 android:id="@+id/edtDateEnd"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Ngày hết hạn"
-                android:inputType="textPersonName" />
-
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true" />
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/nencontract"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Số Tháng thuê:"
-                android:textSize="20dp" />
-
-            <EditText
-                android:id="@+id/edtSumMonth"
-                android:layout_width="162dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Số tháng thuê"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
 
 
         <LinearLayout
@@ -328,9 +334,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/nencontract"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -347,7 +354,9 @@
                 android:ems="10"
                 android:text="Mô tả:"
                 android:textColor="@color/black"
-                android:textSize="24dp" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/edtDescription"
@@ -361,12 +370,13 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
+            android:id="@+id/btnSaveContract"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/bogoc"
+            android:layout_marginBottom="20dp"
             android:text="TẠO" />
 
 

@@ -1,7 +1,7 @@
 package com.example.house_manager.Network
 
+import com.example.house_manager.Activity.AddContractActivity
 import com.example.house_manager.Model.Room
-import com.example.house_manager.Model.RoomEmpty
 import com.example.house_manager.Model.RoomResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -18,8 +18,6 @@ interface RoomService {
 
     @DELETE("rooms/{roomName}")
     fun deleteRoom(@Path("roomName") roomName: String): Call<Void>
-
-    // Inside RoomService
 
     @PUT("rooms/{roomName}")
     fun updateRoom(@Path("roomName") roomName: String, @Body room: Room): Call<Void>
