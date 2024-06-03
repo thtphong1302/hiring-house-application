@@ -1,9 +1,9 @@
 package com.example.house_manager.Activity
 
 import RoomAdapter
+import android.Manifest
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
-import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -18,25 +18,28 @@ import com.example.house_manager.Model.Contract
 import com.example.house_manager.Model.Resident
 import com.example.house_manager.Network.RetrofitInstance
 import com.example.house_manager.R
+import com.itextpdf.kernel.pdf.PdfWriter
+import com.itextpdf.layout.Document
+import com.itextpdf.layout.element.Paragraph
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-
 import kotlinx.android.synthetic.main.activity_add_contract.*
-
-
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import com.itextpdf.kernel.colors.DeviceRgb
+import com.itextpdf.kernel.font.PdfFontFactory
+import com.itextpdf.kernel.geom.PageSize
+import com.itextpdf.layout.element.Text
 
 class AddContractActivity : AppCompatActivity() {
-    private val REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1
+    private val STORAGE_PERMISSION_CODE = 1
     private lateinit var edtResidentName: EditText
     private lateinit var edtPhoneNumber: EditText
     private lateinit var spinnerGender: Spinner
@@ -49,8 +52,6 @@ class AddContractActivity : AppCompatActivity() {
     private lateinit var edtRoomNameInContract: TextView
     private lateinit var startDateData: LocalDate
     private lateinit var endDateData: LocalDate
-
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,17 +71,108 @@ class AddContractActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, genderArray)
         spinnerGender.adapter = adapter
         ToolbarHelper.setToolbar(this, "TẠO HỢP ĐỒNG")
+
         // Set up DatePickers and Spinner
         setupDatePickers()
         setupGenderSpinner()
-        // xử lý PDF
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_WRITE_EXTERNAL_STORAGE)
-        }
 
-        // Thiết lập sự kiện cho nút xuất PDF
-        btnPDF.setOnClickListener {
-            createPdf()
+        // Set up PDF button
+        val createPdfButton: ImageView = findViewById(R.id.btnPDF)
+        createPdfButton.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
+            } else {
+                createPDF()
+            }
+        }
+    }
+
+    private fun createPDF() {
+        val contractName = edtContractName.text.toString().replace("[^a-zA-Z0-9_\\-]".toRegex(), "_")
+
+        // Define file path and create file
+        val pdfPath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString()
+        val file = File(pdfPath, "${contractName}_HopDong.pdf")
+
+        try {
+            val outputStream = FileOutputStream(file)
+            val writer = PdfWriter(outputStream)
+            val pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
+            val document = Document(pdfDoc, PageSize.A4)
+
+            // Define fonts
+            val fontRegular = PdfFontFactory.createFont("Helvetica")
+            val fontBold = PdfFontFactory.createFont("Helvetica-Bold")
+
+            // Define colors
+            val colorBlack = DeviceRgb(0, 0, 0)
+
+            // Add content to PDF
+            val title = Paragraph("Thông Tin Hợp Đồng").setFont(fontBold).setFontSize(18f).setFontColor(colorBlack)
+
+            val contractNameText = if (edtContractName.text.isNotEmpty()) edtContractName.text.toString() else ""
+            val residentNameText = if (edtResidentName.text.isNotEmpty()) edtResidentName.text.toString() else ""
+            val genderText = if (txtGender.text.isNotEmpty()) txtGender.text.toString() else ""
+            val startDateText = if (edtStartDate.text.isNotEmpty()) edtStartDate.text.toString() else ""
+            val endDateText = if (edtEndDate.text.isNotEmpty()) edtEndDate.text.toString() else ""
+            val numberPersonsText = if (edtNumberPersons.text.isNotEmpty()) edtNumberPersons.text.toString() else ""
+            val descriptionText = if (edtDescription.text.isNotEmpty()) edtDescription.text.toString() else ""
+
+            val contractInfo = Paragraph()
+                .add(Text("Tiền Nhà: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(contractNameText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val residentInfo = Paragraph()
+                .add(Text("Tên Người Ở: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(residentNameText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val genderInfo = Paragraph()
+                .add(Text("Giới Tính: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(genderText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val startDateInfo = Paragraph()
+                .add(Text("Ngày Bắt Đầu: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(startDateText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val endDateInfo = Paragraph()
+                .add(Text("Ngày Kết Thúc: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(endDateText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val numberPersonsInfo = Paragraph()
+                .add(Text("Số Người Ở: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(numberPersonsText).setFont(fontRegular).setFontColor(colorBlack))
+
+            val descriptionInfo = Paragraph()
+                .add(Text("Mô Tả: ").setFont(fontBold).setFontColor(colorBlack))
+                .add(Text(descriptionText).setFont(fontRegular).setFontColor(colorBlack))
+
+            document.add(title)
+            document.add(contractInfo)
+            document.add(residentInfo)
+            document.add(genderInfo)
+            document.add(startDateInfo)
+            document.add(endDateInfo)
+            document.add(numberPersonsInfo)
+            document.add(descriptionInfo)
+
+            // Close document
+            document.close()
+
+            Toast.makeText(this, "PDF được tạo thành công!", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error creating PDF: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                createPDF()
+            } else {
+                Toast.makeText(this, "Quyền bị từ chối!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -101,21 +193,15 @@ class AddContractActivity : AppCompatActivity() {
         edtRoomNameInContract.text = roomName
     }
 
-    // Sửa đổi hàm setupDatePickers() trong AddContractActivity
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupDatePickers() {
         val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
-        val dateSetListenerStart =
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                // Tạo đối tượng LocalDate từ ngày được chọn
-                startDateData = LocalDate.of(year, month + 1, dayOfMonth)
-                // Định dạng lại ngày và gán vào EditText cho ngày bắt đầu
-                edtStartDate.setText(startDateData.format(dateFormat))
-            }
+        val dateSetListenerStart = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            startDateData = LocalDate.of(year, month + 1, dayOfMonth)
+            edtStartDate.setText(startDateData.format(dateFormat))
+        }
         val dateSetListenerEnd = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            // Tạo đối tượng LocalDate từ ngày được chọn
             endDateData = LocalDate.of(year, month + 1, dayOfMonth)
-            // Định dạng lại ngày và gán vào EditText cho ngày kết thúc
             edtEndDate.setText(endDateData.format(dateFormat))
         }
 
@@ -128,33 +214,26 @@ class AddContractActivity : AppCompatActivity() {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-
-            // Thiết lập ngày tối thiểu cho DatePickerDialog là hôm nay
             datePickerDialog.datePicker.minDate = System.currentTimeMillis()
-
             datePickerDialog.show()
         }
 
         edtEndDate.setOnClickListener {
             val calendar = Calendar.getInstance()
-            DatePickerDialog(
+            val datePickerDialog = DatePickerDialog(
                 this@AddContractActivity,
                 dateSetListenerEnd,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            datePickerDialog.show()
         }
     }
 
     private fun setupGenderSpinner() {
         spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 txtGender.text = parent.getItemAtPosition(position).toString()
             }
 
@@ -166,10 +245,9 @@ class AddContractActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createResidentAndContract() {
-        // Get data from input fields
         val residentName = edtResidentName.text.toString()
-       val EndDate = edtEndDate.text.toString()
-        val StartDate = edtStartDate.text.toString()
+        val endDate = edtEndDate.text.toString()
+        val startDate = edtStartDate.text.toString()
         val phoneNumber = try {
             edtPhoneNumber.text.toString().toInt()
         } catch (e: NumberFormatException) {
@@ -177,7 +255,6 @@ class AddContractActivity : AppCompatActivity() {
             return
         }
         val gender = spinnerGender.selectedItem.toString()
-
         val contractName = edtContractName.text.toString()
         val description = edtDescription.text.toString()
         val numberPersons = try {
@@ -188,99 +265,41 @@ class AddContractActivity : AppCompatActivity() {
         }
         val roomNameInContract = edtRoomNameInContract.text.toString()
 
-        // Check if all fields are filled
-        if (residentName.isNotEmpty() &&
-            contractName.isNotEmpty() &&
-            description.isNotEmpty() &&
-            roomNameInContract.isNotEmpty()
-        ) {
-            // Check if start date and end date are selected
+        if (residentName.isNotEmpty() && contractName.isNotEmpty() && description.isNotEmpty() && roomNameInContract.isNotEmpty()) {
             if (::startDateData.isInitialized && ::endDateData.isInitialized) {
-                // Create Resident object from input data
                 val resident = Resident(residentName, phoneNumber, gender, roomNameInContract)
-
-                // Send create Resident request to the server
-                GlobalScope.launch(
-                    Dispatchers.Main
-                ) {
+                GlobalScope.launch(Dispatchers.Main) {
                     try {
-                        // Send create Resident request
-                        val createResidentCall =
-                            RetrofitInstance.residentService.createResident(resident)
+                        val createResidentCall = RetrofitInstance.residentService.createResident(resident)
                         createResidentCall.enqueue(object : Callback<Void> {
                             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                                 if (response.isSuccessful) {
-                                    // If create Resident request is successful
-                                    // Create Contract object from input data
-                                    val contract = Contract(
-                                        contractName,
-                                        StartDate,
-                                        EndDate,
-                                        description,
-                                        numberPersons,
-                                        roomNameInContract
-                                    )
-                                    // Send create Contract request to the server
-                                    val createContractCall =
-                                        RetrofitInstance.contractService.createContract(contract)
+                                    val contract = Contract(contractName, startDate, endDate, description, numberPersons, roomNameInContract)
+                                    val createContractCall = RetrofitInstance.contractService.createContract(contract)
                                     createContractCall.enqueue(object : Callback<Void> {
-                                        override fun onResponse(
-                                            call: Call<Void>,
-                                            response: Response<Void>
-                                        ) {
+                                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
                                             if (response.isSuccessful) {
-                                                // If create Contract request is successful
-                                                // Perform any additional actions if needed
-                                                Toast.makeText(
-                                                    this@AddContractActivity,
-                                                    "Contract created successfully",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
-                                                // Finish the activity if needed
+                                                Toast.makeText(this@AddContractActivity, "Contract created successfully", Toast.LENGTH_SHORT).show()
                                             } else {
-                                                // Handle failure when sending create Contract request
-                                                Toast.makeText(
-                                                    this@AddContractActivity,
-                                                    "Failed to create Contract: ${response.message()}",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                Toast.makeText(this@AddContractActivity, "Failed to create Contract: ${response.message()}", Toast.LENGTH_SHORT).show()
                                             }
                                         }
 
                                         override fun onFailure(call: Call<Void>, t: Throwable) {
-                                            // Handle failure when sending create Contract request
-                                            Toast.makeText(
-                                                this@AddContractActivity,
-                                                "Failed to create Contract: ${t.message}",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            Toast.makeText(this@AddContractActivity, "Failed to create Contract: ${t.message}", Toast.LENGTH_SHORT).show()
                                         }
                                     })
                                 } else {
-                                    // If create Resident request fails
-                                    Toast.makeText(
-                                        this@AddContractActivity,
-                                        "Failed to create Resident: ${response.message()}",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(this@AddContractActivity, "Failed to create Resident: ${response.message()}", Toast.LENGTH_SHORT).show()
                                 }
                             }
 
                             override fun onFailure(call: Call<Void>, t: Throwable) {
-                                // Handle failure when sending create Resident request
-                                Toast.makeText(
-                                    this@AddContractActivity,
-                                    "Failed to create Resident: ${t.message}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this@AddContractActivity, "Failed to create Resident: ${t.message}", Toast.LENGTH_SHORT).show()
                             }
                         })
                     } catch (e: Exception) {
-                        Toast.makeText(
-                            this@AddContractActivity,
-                            "Failed to create Resident and Contract: ${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@AddContractActivity, "Failed to create Resident and Contract: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             } else {
@@ -289,41 +308,5 @@ class AddContractActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
         }
-    }
-    private fun createPdf() {
-        val contractView = findViewById<View>(R.id.contractPDF)
-        val width = contractView.width
-        val height = contractView.height
-
-        val document = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
-        val page = document.startPage(pageInfo)
-
-        // Vẽ nội dung của layout lên trang PDF
-        contractView.draw(page.canvas)
-
-        // Kết thúc trang
-        document.finishPage(page)
-        val roomName = intent.getStringExtra("ROOM_NAME")
-        // Lưu tài liệu PDF vào bộ nhớ thiết bị
-        val directoryPath = Environment.getExternalStorageDirectory().path + "/mypdf/contract/"
-        val filePath = "$directoryPath$roomName.pdf"
-        val file = File(directoryPath)
-        if (!file.exists()) {
-            file.mkdirs()
-        }
-
-        try {
-            document.writeTo(FileOutputStream(filePath))
-            Toast.makeText(this, "PDF được tạo thành công", Toast.LENGTH_SHORT).show()
-            finish()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Toast.makeText(this, "Lỗi khi tạo PDF: " + e.message, Toast.LENGTH_SHORT).show()
-        }
-
-        // Đóng tài liệu PDF
-        document.close()
-
     }
 }
