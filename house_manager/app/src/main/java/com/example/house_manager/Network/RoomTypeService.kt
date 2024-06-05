@@ -12,9 +12,9 @@ interface RoomTypeService {
     @POST("type_name")
     fun createRoomType(@Body roomType: RoomTypeResponse): Call<RoomTypeResponse>
 
-    @PUT("/room_type/{name}")
+    @PUT("room_type/{name}")
     fun updateRoomType(@Path("name") name: String, @Body roomType: RoomTypeResponse): Call<RoomTypeResponse>
 
-    @DELETE("/room_type/{name}")
+    @DELETE("room_type/{name}")
     fun deleteRoomType(@Path("name") name: String): Call<Unit>
 }
