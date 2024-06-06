@@ -2,7 +2,6 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.house_manager.Fragments.Room_fragment1
 import com.example.house_manager.Fragments.Room_fragment2
 
 internal class RoomAdapterFragment(val context: Context, fm: FragmentManager, var totalTabs: Int) : FragmentPagerAdapter(fm) {

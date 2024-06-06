@@ -2,6 +2,7 @@ package com.example.house_manager.Network
 
 import com.example.house_manager.Model.Bill
 import retrofit2.http.*
+// chưa thực hiện được chức năng này
 
 interface BillService {
     @GET("bills")

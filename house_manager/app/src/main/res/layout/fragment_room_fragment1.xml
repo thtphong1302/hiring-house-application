@@ -1,11 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <!-- Price range SeekBar -->
+    <SeekBar
+        android:layout_marginTop="30dp"
+        android:id="@+id/seekBarPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="2000000" />
+
+    <TextView
+        android:id="@+id/txtPriceRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekBarPrice"
+        android:text="Price Range: 3000000đ - 5000000đ" />
+
+    <TextView
+        android:id="@+id/txtCurrentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtPriceRange"
+        android:text="Current Price: 3000000đ" />
+
+    <!-- Area range SeekBar -->
+    <SeekBar
+        android:id="@+id/seekBarArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCurrentPrice"
+        android:max="80" />
+
+    <TextView
+        android:id="@+id/txtAreaRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekBarArea"
+        android:text="Area Range: 25 - 100m²" />
+
+    <TextView
+        android:id="@+id/txtCurrentArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAreaRange"
+        android:text="Current Area: 20m²" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRooms"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCurrentArea"
+        android:layout_marginTop="16dp"
+        android:padding="8dp" />
 </RelativeLayout>

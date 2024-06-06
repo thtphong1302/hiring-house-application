@@ -27,6 +27,7 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
         val txtFeeService: TextView = itemView.findViewById(R.id.txtFeeService)
         val btnContract: Button = itemView.findViewById(R.id.btnCreateContract)
         val imgDel: ImageButton = itemView.findViewById(R.id.imgbtnDelRoom)
+        val txtArea: TextView = itemView.findViewById(R.id.txtArea)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -39,9 +40,9 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
         val currentItem = roomList[position]
         holder.txtRoomName.text = currentItem.roomName
         holder.txtStatus.text = currentItem.status
-        holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse.price}"
-        holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse.feeService}"
-
+        holder.txtFeeRoom.text = "Giá tiền: ${currentItem.roomTypeResponse?.price}"
+        holder.txtFeeService.text = "Phí dịch vụ: ${currentItem.roomTypeResponse?.feeService}"
+        holder.txtArea.text = "Diện tích: ${currentItem.roomTypeResponse?.area}"
         holder.btnContract.setOnClickListener {
             val intent = Intent(context, AddContractActivity::class.java).apply {
                 putExtra("ROOM_NAME", currentItem.roomName)
@@ -53,7 +54,6 @@ class RoomAdapter(private val context: Context, private var roomList: List<RoomE
             confirmDeleteRoom(currentItem.roomName, position)
         }
     }
-
 
     override fun getItemCount(): Int {
         return roomList.size

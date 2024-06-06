@@ -8,6 +8,7 @@ data class RoomType(
 data class RoomTypeResponse(
     val typeName: String,
     val price: Int,
-    val feeService: Int
+    val feeService: Int,
+    val area: Int
 )
 

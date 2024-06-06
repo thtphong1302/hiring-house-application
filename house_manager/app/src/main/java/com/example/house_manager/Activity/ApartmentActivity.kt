@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -36,6 +37,7 @@ class ApartmentActivity : AppCompatActivity() {
         setupRecyclerView()
         initImgAddApartment()
         getApartments()
+        initSearch()
     }
 
     override fun onResume() {
@@ -50,7 +52,30 @@ class ApartmentActivity : AppCompatActivity() {
         }
     }
 
+    private fun searchApartments(query: String) {
+        val filteredApartments = ArrayList<Apartment>()
+        for (apartment in apartmentArrayList) {
+            if (apartment.departmentName.contains(query, ignoreCase = true)) {
+                filteredApartments.add(apartment)
+            }
+        }
+        apartmentAdapter.setApartments(filteredApartments)
+    }
 
+    private fun initSearch() {
+        val searchButton = findViewById<Button>(R.id.btnSearch)
+        val searchEditText = findViewById<EditText>(R.id.etSearch)
+
+        searchButton.setOnClickListener {
+            val query = searchEditText.text.toString().trim()
+            if (query.isNotEmpty()) {
+                searchApartments(query)
+            } else {
+                // If search query is empty, display all apartments
+                apartmentAdapter.setApartments(apartmentArrayList)
+            }
+        }
+    }
     private fun getApartments() {
         val call: Call<ApartmentResponse> = RetrofitInstance.apartmentService.getApartments()
         call.enqueue(object : Callback<ApartmentResponse> {

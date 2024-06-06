@@ -1,17 +1,13 @@
 package com.example.house_manager.Network
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.time.LocalDate
 
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
                 //http://192.168.1.9:8080/api/v1/
-            .baseUrl("http://192.168.1.6:8080/api/v1/")
+            .baseUrl("http://172.20.10.4:8080/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
