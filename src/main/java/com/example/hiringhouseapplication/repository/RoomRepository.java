@@ -1,7 +1,9 @@
 package com.example.hiringhouseapplication.repository;
 
+import com.example.hiringhouseapplication.dto.response.RoomResponse;
 import com.example.hiringhouseapplication.entity.Resident;
 import com.example.hiringhouseapplication.entity.Room;
+import com.example.hiringhouseapplication.entity.RoomType;
 import com.example.hiringhouseapplication.enums.Status;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +34,7 @@ public interface RoomRepository extends JpaRepository<Room,String> {
             "INNER JOIN Room r on rs.room.roomName = r.roomName " +
             "WHERE r.roomName = ?1")
     List<Resident> getAllResidentsInRoom(String roomName);
+
+    @Query("SELECT r from  Room r where r.status = ?1")
+    List<Room> findRoomByStatus(Status status);
 }

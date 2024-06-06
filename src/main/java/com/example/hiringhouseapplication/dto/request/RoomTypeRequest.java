@@ -13,4 +13,5 @@ public class RoomTypeRequest {
     private String typeName;
     private int price;
     private int feeService;
+    private int area;
 }

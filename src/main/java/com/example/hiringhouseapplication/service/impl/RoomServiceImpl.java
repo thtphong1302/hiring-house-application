@@ -75,13 +75,13 @@ public class RoomServiceImpl implements RoomService {
                 .build();
     }
 
-    @Override
-    public RoomResponse updateRoom(String roomName, RoomRequest request) {
-        Room room = roomRepository.findByRoomName(roomName).orElseThrow(
-                () -> new ApplicationError(ErrorCode.RESOURCES_NOT_EXIST)
-        );
-        return null;
-    }
+//    @Override
+//    public RoomResponse updateRoom(String roomName, RoomRequest request) {
+//        Room room = roomRepository.findByRoomName(roomName).orElseThrow(
+//                () -> new ApplicationError(ErrorCode.RESOURCES_NOT_EXIST)
+//        );
+//        return null;
+//    }
 
     @Override
     public void deleteRoom(String roomName) {
@@ -129,4 +129,5 @@ public class RoomServiceImpl implements RoomService {
                 .build()
                 ;
     }
+
 }

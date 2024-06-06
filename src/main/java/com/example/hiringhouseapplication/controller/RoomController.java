@@ -56,4 +56,10 @@ public class RoomController {
         roomService.deleteRoom(roomName);
         return ApiResponse.<Void>builder().message("Delete successfully!").build();
     }
+//    @GetMapping("/search")
+//    public ApiResponse<List<RoomResponse>> findRoomsByPriceAndArea(
+//            @RequestParam("price") Integer price,@RequestParam("area") Integer area){
+//        var result = roomService.findRoomByPriceAndArea(price,area);
+//        return ApiResponse.<List<RoomResponse>>builder().result(result).build();
+//    }
 }

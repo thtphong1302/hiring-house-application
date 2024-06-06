@@ -13,5 +13,5 @@ public class RoomTypeResponse {
     private String typeName;
     private int price;
     private int feeService;
-
+    private int area;
 }
